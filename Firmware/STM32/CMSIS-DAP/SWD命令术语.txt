@@ -1,0 +1,72 @@
+SWD协议专业术语
+DRW：Data Read/Write Register
+AP：Access Port
+TAR：Transfer Address Register
+MEM-AP：Memory Access Port
+CTRL/STAT：Control/Status Register
+CFG：Configuration Register,
+BASE：Debug Base Address Register
+
+
+USB指令：DAP.C
+#define ID_DAP_SWJ_Sequence			0x12	//连接请求--数据高电平，给51个时钟，总线复位
+#define ID_DAP_Transfer				0x05	//获取芯片设备ID码（IDCODE）MCU device ID code(微控制器设备ID编码)
+											//读IDCOD	0X05 0X00 0X01 0X02
+											
+__________________________________USB请求__________________________________
+_____________bmRequestType域
+结构体：	REQUEST_TYPE
+这个域表明此请求的特性。包括接收端口、请求类型、传输方向
+D[4:0]-接收端：		0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
+D[6:5]-类型：		0＝标准，1＝群组，2＝供应商3＝保留
+//D7-数据传输方向：	0＝主机至设备，1＝设备至主机
+
+D[6:5]-类型
+00:	REQUEST_STANDARD	标准请求
+01:	REQUEST_CLASS		群组
+02:	REQUEST_VENDOR		供应商
+03:	REQUEST_RESERVED	保留
+
+_____________bRequest域
+结构体：	USB_SETUP_PACKET
+这个域标识特别的请求(标准请求)			
+			
+标准请求代码：
+00:	USB_REQUEST_GET_STATUS    			获取设备状态	：这个请求返回指定接收器的状态
+01:	USB_REQUEST_CLEAR_FEATURE           清除特性		：这个请求是被用来清除或禁能一个特性。
+03:	USB_REQUEST_SET_FEATURE             设置特性 	：这个请求用于设置或使能一个指定的特性.
+05:	USB_REQUEST_SET_ADDRESS             设置地址 	：这个请求为所有未来的设备访问设置设备地址
+06:	USB_REQUEST_GET_DESCRIPTOR          取得描述符	：这个请求返回存在的描述符.获取设备描述，包括设备描述符，配置描述符，接口描述符，字符串描述符
+07:	USB_REQUEST_SET_DESCRIPTOR          设置描述符	：此请求用于更新或添加新的描述表符.
+08:	USB_REQUEST_GET_CONFIGURATION       取得配置		：这个请求返回当前设备的配置值.
+09:	USB_REQUEST_SET_CONFIGURATION       设置配置		：这个请求设置设备的配置
+10:	USB_REQUEST_GET_INTERFACE           取得接口		：这个请求向指定接口返回选中的备用设备.
+11:	USB_REQUEST_SET_INTERFACE           设置接口		：这个请求允许主机为指定的接口选择另一个设置.
+12:	USB_REQUEST_SYNC_FRAME              同步帧		：这个请求用于设置和报告端点的同步帧
+
+_____________DESCRIPTOR域
+USB标准描述符
+01:	USB_DEVICE_DESCRIPTOR_TYPE                  设备描述符	：设备描述符给出了USB设备的一般信息。这包括对设备及所有设备配置起全程作用的信息。一个USB设备只能有一个设备描述符.
+02:	USB_CONFIGURATION_DESCRIPTOR_TYPE           配置描述符	：配置描述表给出了一设备配置的信息，描述表包括一个b Configuration Value域，在SetConfiguration(  )请时被用作参数来设置所需配置 .
+03:	USB_STRING_DESCRIPTOR_TYPE                  3
+04:	USB_INTERFACE_DESCRIPTOR_TYPE               接口描述符	：此描述表在一个配置内给出一个接口的信息。如果一个配置支持不止一个接口，端节点的描述表会跟在接口描述表后被返回，接口描述表总是作为配置描述表的一部分被返回。
+05:	USB_ENDPOINT_DESCRIPTOR_TYPE                5
+06:	USB_DEVICE_QUALIFIER_DESCRIPTOR_TYPE      	设备限定符	：设备限定描述符说明了呢功能进行高速操作的设备在其他速度操作时产生的变化信息.
+07:	USB_OTHER_SPEED_CONFIG_DESCRIPTOR_TYPE      其他速度配置	：说明了能进行高速操作的设备在其他可能的速度下操作配置.其他速度配置的结构与配置描述符一样.
+08:	USB_INTERFACE_POWER_DESCRIPTOR_TYPE         8
+09:	USB_OTG_DESCRIPTOR_TYPE                     9
+10:	USB_DEBUG_DESCRIPTOR_TYPE                  10
+11:	USB_INTERFACE_ASSOCIATION_DESCRIPTOR_TYPE  11 
+
+
+
+
+_____________ABORT AP中止寄存器
+Bits[31:5]	：	Reserved, SBZ.		//保留，设置为0
+bit[4]		：	ORUNERRCLR,  		//此位写1清除 CTRL/STAT.STICKYORUN 溢出错误
+bit[3]		：	WDERRCLR,  			//此位写1清除 CTRL/STAT.WDATAERR 写错误
+bit[2]		：	STKERRCLR,  		//此位写1清除 CTRL/STAT.STICKYERR
+bit[1]		：	STKCMPCLR,  		//此位写1清除 CTRL/STAT.STICKYCMP
+bit[0]		：	DAPABORT,  			//当编程器接收到WAIT响应时，此位写1
+
+_____________CTRL/STAT 寄存器

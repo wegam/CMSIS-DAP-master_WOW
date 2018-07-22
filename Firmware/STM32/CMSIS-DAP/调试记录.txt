@@ -1,0 +1,14 @@
+20170510：
+USBD_MSC
+usb_lib.c文件：//#if    (USBD_MSC_ENABLE)			//USBD_MSC_ENABLE==0时如不注释掉#if则会编译报错，除非把usbd_msc.c和usbd_core_msc.c移除
+usbd_msc.c加入	__weak U8   USBD_MSC_BulkBuf  	[1024]; //20170510如果不定义_weak USBD_MSC_BulkBuf,当USBD_MSC_ENABLE==0时，usb_lib.c中的USBD_MSC_BulkBuf数组宽度报错
+
+20170511
+使能MSC时
+usbd_msc.c文件：USBD_MSC_GetCBW函数中响应USBD_MSC_SetStallEP（）造成读数未stall响应
+端点4读数不对，BulkLen = USBD_ReadEP(usbd_msc_ep_bulkout, USBD_MSC_BulkBuf);未读到MSC_CBW_Signature
+相关字：
+USB_PMA_ADDR
+pBUF_DSCR
+
+
