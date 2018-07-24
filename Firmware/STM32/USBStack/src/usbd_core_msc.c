@@ -63,7 +63,6 @@ __weak BOOL USBD_EndPoint0_Setup_MSC_ReqToIF (void)
             USBD_DataInStage();
             return (__TRUE);
           }
-					
         }
         break;
     }

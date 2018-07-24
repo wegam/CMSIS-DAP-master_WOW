@@ -31,6 +31,13 @@
 #define REQUEST_TO_ENDPOINT        2
 #define REQUEST_TO_OTHER           3
 
+/* bmRequestType Definition */
+typedef __packed struct _REQUEST_TYPE {
+  U8 Recipient : 5;                     /* D4..0: Recipient */										//D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
+  U8 Type      : 2;                     /* D6..5: Type */													//D[6:5]-类型：0＝标准，1＝群组，2＝供应商3＝保留
+  U8 Dir       : 1;                     /* D7:    Data Phase Txsfer Direction */	//D7-数据传输方向：0＝主机至设备，1＝设备至主机
+} REQUEST_TYPE;
+
 /* USB Standard Request Codes */		//标准请求代码
 #define USB_REQUEST_GET_STATUS                 0		//获取设备状态	：这个请求返回指定接收器的状态
 #define USB_REQUEST_CLEAR_FEATURE              1		//清除特性			：这个请求是被用来清除或禁能一个特性。
@@ -53,32 +60,25 @@
 #define USB_FEATURE_ENDPOINT_STALL             0
 #define USB_FEATURE_REMOTE_WAKEUP              1		//远程唤醒
 
-/* bmRequestType Definition */
-typedef __packed struct _REQUEST_TYPE {
-  U8 Recipient : 5;                     /* D4..0: Recipient */										//D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
-  U8 Type      : 2;                     /* D6..5: Type */													//D[6:5]-类型：0＝标准，1＝群组，2＝供应商3＝保留
-  U8 Dir       : 1;                     /* D7:    Data Phase Txsfer Direction */	//D7-数据传输方向：0＝主机至设备，1＝设备至主机
-} REQUEST_TYPE;
-
 /* USB Default Control Pipe Setup Packet */
 typedef __packed struct _USB_SETUP_PACKET {
   REQUEST_TYPE bmRequestType;           /* bmRequestType */	//USB设备请求类型
-  U8  bRequest;                         /* bRequest */			//本描述符的请求类型
-  __packed union {											//是根据不同的请求而设置不同的值。一般就是传送参数给设备标明这是什么请求。
-    U16        wValue;                  /* wValue *///wValue值在这里的高字节是01，那么它就是设备描述符了。低字节是00，那么它就是表示从偏移地址0开始读取设备描述符。由于在配置描述符里有很多配置，所以低字节在那里就可以用来识别获取同样类型的描述符不同的配置。
+  U8  bRequest;                         /* bRequest */			//特定请求
+  __packed union {
+    U16        wValue;                  /* wValue */
     __packed struct {
       U8         wValueL;
       U8         wValueH;
     };
   };
-  __packed union {											//
-    U16        wIndex;                  /* wIndex */	//wIndex是根据不同的请求而设置不同的值。一般用来说明端点号或者说明接口标识。在获取描述符里，设置为0，或者是语言ID。在这个发送的描述符里，它是设置为00 00。
+  __packed union {
+    U16        wIndex;                  /* wIndex */
     __packed struct {
       U8         wIndexL;
       U8         wIndexH;
     };
   };
-  U16          wLength;                 /* wLength */	//wLength是根据请求来决定下一阶段发送数据的长度。
+  U16          wLength;                 /* wLength */
 } USB_SETUP_PACKET;
 
 

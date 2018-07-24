@@ -23,6 +23,7 @@
 #include "string.h"
 #include "CMSIS_Conf.H"
 #include "DAP.h"
+#include "SWD_WOW.h"
 
 
 #define DAP_FW_VER      "1.0"   // Firmware Version	// ¹Ì¼þ°æ±¾ DAP_FW_VER

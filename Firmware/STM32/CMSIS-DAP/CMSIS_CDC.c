@@ -47,7 +47,7 @@ int32_t CMSIS_CDC_Process(void)
 		//从USB接收数据长度
 		if (usb_rx_ch == -1)
 		{
-			usb_rx_ch = USBD_CDC_ACM_GetChar();					//从USB串口读取数据，一字节数据
+			usb_rx_ch = USBD_CDC_ACM_GetChar();					//从USB读取数据，一字节数据
 //			usb_tx_ch	= usb_rx_ch;			
 		}		
 		if (usb_rx_ch != -1)
@@ -64,7 +64,7 @@ int32_t CMSIS_CDC_Process(void)
 		}
 		if (usb_tx_ch == -1)
 		{
-			usb_tx_ch = UART_GetChar();
+			usb_tx_ch = UART_GetChar();						//从串口读取数据
 		}			
 		return(rx_num);
 }

@@ -19,7 +19,6 @@
 #include "usb_for_lib.h"
 #include "usb_lib.h"
 
-
 //#if	(USBD_MSC_ENABLE)
 BOOL        USBD_MSC_MediaReady   = __FALSE;
 BOOL        USBD_MSC_ReadOnly     = __FALSE;
@@ -29,8 +28,8 @@ U32         USBD_MSC_BlockGroup;
 U32         USBD_MSC_BlockCount;
 U8         *USBD_MSC_BlockBuf;
 
-MSC_CBW     USBD_MSC_CBW;                  /* Command Block Wrapper */		//命令数据包
-MSC_CSW     USBD_MSC_CSW;                  /* Command Status Wrapper */		//命令状态包
+MSC_CBW     USBD_MSC_CBW;                  /* Command Block Wrapper */
+MSC_CSW     USBD_MSC_CSW;                  /* Command Status Wrapper */
 
 BOOL        USBD_MSC_MediaReadyEx = __FALSE; /* Previous state of Media ready */
 BOOL        MemOK;                         /* Memory OK */
@@ -39,9 +38,7 @@ U32         Block;                         /* R/W Block  */
 U32         Offset;                        /* R/W Offset */
 U32         Length;                        /* R/W Length */
 
-//U8          BulkStage;                     /* Bulk Stage */
-U8          BulkStage=MSC_BS_CBW;                     /* Bulk Stage */
-
+U8          BulkStage;                     /* Bulk Stage */
 U32         BulkLen;                       /* Bulk In/Out Length */
 
 __weak U8   USBD_MSC_BulkBuf             [1024];	//20170510如果不定义_weak USBD_MSC_BulkBuf,当USBD_MSC_ENABLE==0时，usb_lib.c中的USBD_MSC_BulkBuf数组宽度报错
@@ -843,8 +840,6 @@ void USBD_MSC_GetCBW (void)
 	{
     *((U8 *)&USBD_MSC_CBW + n) = USBD_MSC_BulkBuf[n];
   }
-	if(USBD_MSC_CBW.dSignature == MSC_CBW_Signature)
-//		while(1);
   if ((BulkLen == sizeof(USBD_MSC_CBW)) && (USBD_MSC_CBW.dSignature == MSC_CBW_Signature))
 	{
     /* Valid USBD_MSC_CBW */
@@ -1083,7 +1078,7 @@ void USBD_MSC_EP_BULKIN_Event (U32 event)
 
 void USBD_MSC_EP_BULKOUT_Event (U32 event)
 {
-  BulkLen = MSC_ReadEP(usbd_msc_ep_bulkout, USBD_MSC_BulkBuf);
+  BulkLen = USBD_ReadEP(usbd_msc_ep_bulkout, USBD_MSC_BulkBuf);
   USBD_MSC_BulkOut();
 }
 

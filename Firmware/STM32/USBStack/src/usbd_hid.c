@@ -17,8 +17,6 @@
 #include "rl_usb.h"
 #include "string.h"
 #include "usb_for_lib.h"
-//#include "usb_config.c"
-
 
 
 U8           USBD_HID_Protocol;
@@ -533,5 +531,3 @@ BOOL usbd_hid_get_report_trigger (U8 rid, U8 *buf, int len)
 
   return (__FALSE);
 }
-
-

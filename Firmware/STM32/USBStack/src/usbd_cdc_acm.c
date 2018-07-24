@@ -17,7 +17,7 @@
 #include "rl_usb.h"
 #include "string.h"
 #include "usb_for_lib.h"
-#include "stdint.h"                      /* standard types definitions                      */
+
 
 /* Module global variables                                                    */
 
@@ -518,7 +518,7 @@ void USBD_CDC_ACM_EP_INTIN_Event (uint32_t event)
     available.
  */
 
-static void USBD_CDC_ACM_EP_BULKOUT_HandleData()
+static void USBD_CDC_ACM_EP_BULKOUT_HandleData ()
 {
   int32_t len_received;
 	/*缓冲空间未满，可以继续接收数据*/

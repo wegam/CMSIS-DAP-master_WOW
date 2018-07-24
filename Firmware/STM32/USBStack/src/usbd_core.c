@@ -670,81 +670,66 @@ __inline BOOL USBD_ReqSetInterface (void)
   U32                    ifn = 0, alt = 0, old = 0, msk = 0;
   U32                    n, m;
   BOOL                   set;
-	
-	switch (USBD_SetupPacket.bmRequestType.Recipient)		//判断请求端口 //D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
+
+  switch (USBD_SetupPacket.bmRequestType.Recipient)		//判断请求端口 //D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
 	{
-		//1）------------------------------------------------------
-		case REQUEST_TO_INTERFACE:
-			if (USBD_Configuration == 0)
-				return (__FALSE);
-			set = __FALSE;
-			if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE))
-			{
-				return (__FALSE);  /* High speed request but high-speed not enabled */
-			}
-			if (USBD_HighSpeed == __FALSE)
-			{
-				pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor;
-			}
-			else
-			{
-				pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor_HS;
-			}
-			while (pD->bLength)
-			{
-				switch (pD->bDescriptorType)
-				{
-					//1.1）------------------------------------------------------
-					case USB_CONFIGURATION_DESCRIPTOR_TYPE:
-						if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue != USBD_Configuration)
-						{
-							pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD+((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength);
-							continue;
-						}
-					break;
-					//1.2）------------------------------------------------------
-					case USB_INTERFACE_DESCRIPTOR_TYPE:
-						ifn = ((USB_INTERFACE_DESCRIPTOR *)pD)->bInterfaceNumber;
-						alt = ((USB_INTERFACE_DESCRIPTOR *)pD)->bAlternateSetting;
-						msk = 0;
-						if ((ifn == USBD_SetupPacket.wIndexL) && (alt == USBD_SetupPacket.wValueL))
-						{
-							set = __TRUE;
-							old = USBD_AltSetting[ifn];
-							USBD_AltSetting[ifn] = (U8)alt;
-						}
-					break;
-					//1.3）------------------------------------------------------
-					case USB_ENDPOINT_DESCRIPTOR_TYPE:
-						if (ifn == USBD_SetupPacket.wIndexL)
-						{
-							n = ((USB_ENDPOINT_DESCRIPTOR *)pD)->bEndpointAddress & 0x8F;
-							m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
-							if (alt == USBD_SetupPacket.wValueL)
-							{
-								USBD_EndPointMask |=  m;
-								USBD_EndPointHalt &= ~m;
-								USBD_ConfigEP((USB_ENDPOINT_DESCRIPTOR *)pD);
-								USBD_EnableEP(n);
-								USBD_ResetEP(n);
-								msk |= m;
-							}
-							else if ((alt == old) && ((msk & m) == 0))
-							{
-								USBD_EndPointMask &= ~m;
-								USBD_EndPointHalt &= ~m;
-								USBD_DisableEP(n);
-							}
-						}
-					break;
-				}
-				pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD + pD->bLength);
-		}
-		break;
-		default:
-			return (__FALSE);
-	}
-	return (set);
+    case REQUEST_TO_INTERFACE:
+      if (USBD_Configuration == 0) return (__FALSE);
+      set = __FALSE;
+      if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE)) {
+        return (__FALSE);  /* High speed request but high-speed not enabled */
+      }
+      if (USBD_HighSpeed == __FALSE) {
+        pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor;
+      } else {
+        pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor_HS;
+      }
+      while (pD->bLength) {
+        switch (pD->bDescriptorType) {
+          case USB_CONFIGURATION_DESCRIPTOR_TYPE:
+            if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue != USBD_Configuration) {
+              pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD+((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength);
+              continue;
+            }
+            break;
+          case USB_INTERFACE_DESCRIPTOR_TYPE:
+            ifn = ((USB_INTERFACE_DESCRIPTOR *)pD)->bInterfaceNumber;
+            alt = ((USB_INTERFACE_DESCRIPTOR *)pD)->bAlternateSetting;
+            msk = 0;
+            if ((ifn == USBD_SetupPacket.wIndexL) && (alt == USBD_SetupPacket.wValueL)) {
+              set = __TRUE;
+              old = USBD_AltSetting[ifn];
+              USBD_AltSetting[ifn] = (U8)alt;
+            }
+            break;
+          case USB_ENDPOINT_DESCRIPTOR_TYPE:
+            if (ifn == USBD_SetupPacket.wIndexL) {
+              n = ((USB_ENDPOINT_DESCRIPTOR *)pD)->bEndpointAddress & 0x8F;
+              m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
+              if (alt == USBD_SetupPacket.wValueL) {
+                USBD_EndPointMask |=  m;
+                USBD_EndPointHalt &= ~m;
+                USBD_ConfigEP((USB_ENDPOINT_DESCRIPTOR *)pD);
+                USBD_EnableEP(n);
+                USBD_ResetEP(n);
+                msk |= m;
+              }
+              else if ((alt == old) && ((msk & m) == 0)) {
+                USBD_EndPointMask &= ~m;
+                USBD_EndPointHalt &= ~m;
+                USBD_DisableEP(n);
+              }
+            }
+           break;
+        }
+        pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD + pD->bLength);
+      }
+      break;
+    default:
+      return (__FALSE);
+  }
+
+  return (set);
 }
 
 /*******************************************************************************
@@ -769,7 +754,6 @@ void USBD_EndPoint0 (U32 event)
 
     switch (USBD_SetupPacket.bmRequestType.Type) 		//数据包类型/请求类型	//结构体：USB_SETUP_PACKET->REQUEST_TYPE->Type:D[6:5]-类型：0＝标准，1＝群组，2＝供应商3＝保留
 		{	
-			//1）------------------------------------------------------
       case REQUEST_STANDARD:									// 00 标准请求
         switch (USBD_SetupPacket.bRequest)		//特定请求	//结构体：USB_SETUP_PACKET->bRequest：
 				{
@@ -923,9 +907,8 @@ void USBD_EndPoint0 (U32 event)
           default:
             goto stall;
         }
-        break;
-			/* end case REQUEST_STANDARD */
-			//2）------------------------------------------------------
+        break;  /* end case REQUEST_STANDARD */
+
       case REQUEST_CLASS:										//群组请求
         switch (USBD_SetupPacket.bmRequestType.Recipient)
 				{
@@ -952,7 +935,7 @@ void USBD_EndPoint0 (U32 event)
       
 setup_class_ok:                                                          /* request finished successfully */
         break;  /* end case REQUEST_CLASS */
-			//3）------------------------------------------------------
+
       default:
 stall:  if ((USBD_SetupPacket.bmRequestType.Dir == REQUEST_HOST_TO_DEVICE) &&
             (USBD_SetupPacket.wLength != 0))

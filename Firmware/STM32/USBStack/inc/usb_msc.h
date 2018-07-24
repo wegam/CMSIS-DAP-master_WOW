@@ -12,7 +12,6 @@
 #ifndef __USB_MSC_H__
 #define __USB_MSC_H__
 
-#include "RTL.h"
 
 /* MSC Subclass Codes */
 #define MSC_SUBCLASS_RBC                0x01
@@ -45,21 +44,21 @@
 
 /* Bulk-only Command Block Wrapper */
 typedef __packed struct _MSC_CBW {
-  U32 dSignature;					//常数0x43425355，标识为CBW命令块。
-  U32 dTag;								//由主机发送的CBW标签。设备应该在相关的CSW的dCSWTag以相同的值应答主机。
-  U32 dDataLength;				//在本命令执行期间，主机期望通过Bulk-In或Bulk-Out端点传输的数据长度。如果为0，则表示这之间没有数据传输。
-  U8  bmFlags;						//定义如下（Bit7 Direction（dDataLength为0时，该值无意义） ：Bit7=0：数据从主机到设备，Bit7=1：数据从设备到主机，Bit6：Obsolete 0，Bits 5..0：Reserved 0
-  U8  bLUN;								//表示正在发送命令字的设备的逻辑单元号（LUN）。对于支持多个LUN的设备，主机设置相对应的LUN值。否则，该值为0。
-  U8  bCBLength;					//CB的有效字节长度。有效值是在1到16之间。
-  U8  CB[16];							//被设备解析执行的命令块。
+  U32 dSignature;
+  U32 dTag;
+  U32 dDataLength;
+  U8  bmFlags;
+  U8  bLUN;
+  U8  bCBLength;
+  U8  CB[16];
 } MSC_CBW;
 
 /* Bulk-only Command Status Wrapper */
 typedef __packed struct _MSC_CSW {
-  U32 dSignature;					//常数0x53425355，标识为CSW状态块
-  U32 dTag;								//取相对应的CBW的dCBWTag值。
-  U32 dDataResidue;				//实际传输的数据个数和期望要传输的数据个数之差。
-  U8  bStatus;						//指示命令的执行状态。如果命令正确执行，bCSWStatus 返回0 ，不正确返回1，phase错返回2（当HOST收到此错误时需要对Device复位）
+  U32 dSignature;
+  U32 dTag;
+  U32 dDataResidue;
+  U8  bStatus;
 } MSC_CSW;
 
 #define MSC_CBW_Signature               0x43425355

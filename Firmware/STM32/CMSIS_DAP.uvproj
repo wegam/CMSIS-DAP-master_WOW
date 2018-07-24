@@ -30,7 +30,6 @@
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>SFD\ST\STM32F1xx\STM32F103xx.sfr</SFDFile>
-          <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -72,8 +71,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopB1X>0</nStopB1X>
-            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -82,8 +79,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopA1X>0</nStopA1X>
-            <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>1</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
@@ -102,7 +97,6 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument></CustomArgument>
           <IncludeLibraryModules></IncludeLibraryModules>
-          <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -132,7 +126,6 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -144,10 +137,9 @@
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>6</TargetSelection>
+          <TargetSelection>7</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -175,12 +167,8 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
-          <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -227,7 +215,6 @@
             <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
-            <nSecure>0</nSecure>
             <RoSelD>3</RoSelD>
             <RwSelD>3</RwSelD>
             <CodeSel>0</CodeSel>
@@ -360,15 +347,9 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
-            <useXO>0</useXO>
-            <v6Lang>0</v6Lang>
-            <v6LangP>0</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F10X_MD BOARD_V1 USB_TEST</Define>
+              <Define>STM32F10X_MD BOARD_V1 STM32_CDC</Define>
               <Undefine></Undefine>
               <IncludePath>.\STM32F10x_Lib\inc;.\STM32F10x_Lib\src;.\CMSIS-DAP;.\USBStack\inc;.\USBStack\src;.\STM32F10x_Lib\rtl;.\Display</IncludePath>
             </VariousControls>
@@ -382,7 +363,6 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -399,7 +379,6 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <pXoBase></pXoBase>
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -413,11 +392,6 @@
         <Group>
           <GroupName>MAIN</GroupName>
           <Files>
-            <File>
-              <FileName>UserApp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\UserApp.c</FilePath>
-            </File>
             <File>
               <FileName>CMSIS_DAP.c</FileName>
               <FileType>1</FileType>
@@ -459,6 +433,11 @@
               <FilePath>.\CMSIS-DAP\SWD_WOW.c</FilePath>
             </File>
             <File>
+              <FileName>WOW_USART_BootLoader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\WOW_USART_BootLoader.c</FilePath>
+            </File>
+            <File>
               <FileName>CMSIS_MX25L4006E.C</FileName>
               <FileType>1</FileType>
               <FilePath>.\CMSIS-DAP\CMSIS_MX25L4006E.C</FilePath>
@@ -468,6 +447,36 @@
         <Group>
           <GroupName>CMSIS-DAP</GroupName>
           <Files>
+            <File>
+              <FileName>system_stm32f10x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\system_stm32f10x.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usb_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_STM32F103.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_STM32F103.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_user_cdc_acm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_user_cdc_acm.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_user_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_user_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>UserApp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\UserApp.c</FilePath>
+            </File>
             <File>
               <FileName>DAP.c</FileName>
               <FileType>1</FileType>
@@ -482,107 +491,6 @@
               <FileName>JTAG_DP.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\CMSIS-DAP\JTAG_DP.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ISP</GroupName>
-          <Files>
-            <File>
-              <FileName>WOW_USART_BootLoader.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\WOW_USART_BootLoader.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HID</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_hid.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_hid.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_user_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usbd_user_hid.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ADC</GroupName>
-        </Group>
-        <Group>
-          <GroupName>CDC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_cdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_user_cdc_acm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usbd_user_cdc_acm.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc_acm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_cdc_acm.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>MSC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_msc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_msc.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STM32_USB-FS-Device_Driver</GroupName>
-        </Group>
-        <Group>
-          <GroupName>USBStack</GroupName>
-          <Files>
-            <File>
-              <FileName>usb_Istr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usb_Istr.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usb_config.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USBLIB</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usb_lib.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -609,11 +517,6 @@
         <Group>
           <GroupName>STM32F10x_Lib</GroupName>
           <Files>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\system_stm32f10x.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
@@ -658,6 +561,51 @@
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\STM32F10x_Lib\src\stm32f10x_spi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USBStack</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_cdc_acm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_cdc_acm.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_cdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usb_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_msc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_msc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -712,7 +660,6 @@
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>SFD\ST\STM32F1xx\STM32F103xx.sfr</SFDFile>
-          <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -754,8 +701,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopB1X>0</nStopB1X>
-            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -764,8 +709,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopA1X>0</nStopA1X>
-            <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>1</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
@@ -784,7 +727,6 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument></CustomArgument>
           <IncludeLibraryModules></IncludeLibraryModules>
-          <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -814,7 +756,6 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -826,7 +767,6 @@
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>7</TargetSelection>
@@ -859,10 +799,6 @@
           <Flash2>BIN\UL2CM3.DLL</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
-          <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -909,7 +845,6 @@
             <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
-            <nSecure>0</nSecure>
             <RoSelD>3</RoSelD>
             <RwSelD>3</RwSelD>
             <CodeSel>0</CodeSel>
@@ -1042,17 +977,11 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
-            <useXO>0</useXO>
-            <v6Lang>0</v6Lang>
-            <v6LangP>0</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD BOARD_V1  USB_TEST</Define>
               <Undefine></Undefine>
-              <IncludePath>.\STM32F10x_Lib\inc;.\STM32F10x_Lib\src;.\CMSIS-DAP;.\USBStack\inc;.\USBStack\src;.\STM32F10x_Lib\rtl;.\Display;.\STM32_USB-FS-Device_Driver\inc</IncludePath>
+              <IncludePath>.\STM32F10x_Lib\inc;.\STM32F10x_Lib\src;.\CMSIS-DAP;.\USBStack\inc;.\USBStack\src;.\STM32F10x_Lib\rtl;.\Display</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1064,7 +993,6 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -1081,7 +1009,6 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <pXoBase></pXoBase>
             <ScatterFile>.\build\output\CMSIS_TEST.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -1095,11 +1022,6 @@
         <Group>
           <GroupName>MAIN</GroupName>
           <Files>
-            <File>
-              <FileName>UserApp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\UserApp.c</FilePath>
-            </File>
             <File>
               <FileName>CMSIS_DAP.c</FileName>
               <FileType>1</FileType>
@@ -1141,6 +1063,11 @@
               <FilePath>.\CMSIS-DAP\SWD_WOW.c</FilePath>
             </File>
             <File>
+              <FileName>WOW_USART_BootLoader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\WOW_USART_BootLoader.c</FilePath>
+            </File>
+            <File>
               <FileName>CMSIS_MX25L4006E.C</FileName>
               <FileType>1</FileType>
               <FilePath>.\CMSIS-DAP\CMSIS_MX25L4006E.C</FilePath>
@@ -1150,6 +1077,36 @@
         <Group>
           <GroupName>CMSIS-DAP</GroupName>
           <Files>
+            <File>
+              <FileName>system_stm32f10x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\system_stm32f10x.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usb_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_STM32F103.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_STM32F103.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_user_cdc_acm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_user_cdc_acm.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_user_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_user_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>UserApp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\UserApp.c</FilePath>
+            </File>
             <File>
               <FileName>DAP.c</FileName>
               <FileType>1</FileType>
@@ -1164,107 +1121,6 @@
               <FileName>JTAG_DP.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\CMSIS-DAP\JTAG_DP.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ISP</GroupName>
-          <Files>
-            <File>
-              <FileName>WOW_USART_BootLoader.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\WOW_USART_BootLoader.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HID</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_hid.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_hid.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_user_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usbd_user_hid.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ADC</GroupName>
-        </Group>
-        <Group>
-          <GroupName>CDC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_cdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_user_cdc_acm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usbd_user_cdc_acm.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc_acm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_cdc_acm.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>MSC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_msc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_msc.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STM32_USB-FS-Device_Driver</GroupName>
-        </Group>
-        <Group>
-          <GroupName>USBStack</GroupName>
-          <Files>
-            <File>
-              <FileName>usb_Istr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usb_Istr.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usb_config.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USBLIB</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usb_lib.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1291,11 +1147,6 @@
         <Group>
           <GroupName>STM32F10x_Lib</GroupName>
           <Files>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\system_stm32f10x.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
@@ -1340,6 +1191,51 @@
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\STM32F10x_Lib\src\stm32f10x_spi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USBStack</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_cdc_acm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_cdc_acm.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_cdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usb_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_msc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_msc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1394,7 +1290,6 @@
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
           <SFDFile>SFD\ST\STM32F1xx\STM32F103xx.sfr</SFDFile>
-          <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
@@ -1436,8 +1331,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopB1X>0</nStopB1X>
-            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -1446,8 +1339,6 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
-            <nStopA1X>0</nStopA1X>
-            <nStopA2X>0</nStopA2X>
           </AfterMake>
           <SelectedForBatchBuild>1</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
@@ -1466,7 +1357,6 @@
           <StopOnExitCode>3</StopOnExitCode>
           <CustomArgument></CustomArgument>
           <IncludeLibraryModules></IncludeLibraryModules>
-          <ComprImg>1</ComprImg>
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
@@ -1496,7 +1386,6 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -1508,7 +1397,6 @@
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>7</TargetSelection>
@@ -1541,10 +1429,6 @@
           <Flash2>BIN\UL2CM3.DLL</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
-          <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
-          <pFcArmRoot></pFcArmRoot>
-          <FcArmLst>0</FcArmLst>
         </Utilities>
         <TargetArmAds>
           <ArmAdsMisc>
@@ -1591,7 +1475,6 @@
             <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
-            <nSecure>0</nSecure>
             <RoSelD>3</RoSelD>
             <RwSelD>3</RwSelD>
             <CodeSel>0</CodeSel>
@@ -1724,12 +1607,6 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
-            <useXO>0</useXO>
-            <v6Lang>0</v6Lang>
-            <v6LangP>0</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD BOARD_V1  CMSIS_TEST SWD_TEST</Define>
@@ -1746,7 +1623,6 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -1763,7 +1639,6 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <pXoBase></pXoBase>
             <ScatterFile>.\build\output\CMSIS_TEST.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
@@ -1777,11 +1652,6 @@
         <Group>
           <GroupName>MAIN</GroupName>
           <Files>
-            <File>
-              <FileName>UserApp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\UserApp.c</FilePath>
-            </File>
             <File>
               <FileName>CMSIS_DAP.c</FileName>
               <FileType>1</FileType>
@@ -1823,6 +1693,11 @@
               <FilePath>.\CMSIS-DAP\SWD_WOW.c</FilePath>
             </File>
             <File>
+              <FileName>WOW_USART_BootLoader.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\WOW_USART_BootLoader.c</FilePath>
+            </File>
+            <File>
               <FileName>CMSIS_MX25L4006E.C</FileName>
               <FileType>1</FileType>
               <FilePath>.\CMSIS-DAP\CMSIS_MX25L4006E.C</FilePath>
@@ -1832,6 +1707,36 @@
         <Group>
           <GroupName>CMSIS-DAP</GroupName>
           <Files>
+            <File>
+              <FileName>system_stm32f10x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\system_stm32f10x.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usb_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_STM32F103.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_STM32F103.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_user_cdc_acm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_user_cdc_acm.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_user_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\usbd_user_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>UserApp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS-DAP\UserApp.c</FilePath>
+            </File>
             <File>
               <FileName>DAP.c</FileName>
               <FileType>1</FileType>
@@ -1846,107 +1751,6 @@
               <FileName>JTAG_DP.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\CMSIS-DAP\JTAG_DP.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ISP</GroupName>
-          <Files>
-            <File>
-              <FileName>WOW_USART_BootLoader.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\WOW_USART_BootLoader.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HID</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_hid.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_hid.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_user_hid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usbd_user_hid.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>ADC</GroupName>
-        </Group>
-        <Group>
-          <GroupName>CDC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_cdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_cdc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_user_cdc_acm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usbd_user_cdc_acm.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_cdc_acm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_cdc_acm.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>MSC</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core_msc.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbd_msc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_msc.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>STM32_USB-FS-Device_Driver</GroupName>
-        </Group>
-        <Group>
-          <GroupName>USBStack</GroupName>
-          <Files>
-            <File>
-              <FileName>usb_Istr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usb_Istr.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\usb_config.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>USBLIB</GroupName>
-          <Files>
-            <File>
-              <FileName>usbd_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usbd_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>usb_lib.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\USBStack\src\usb_lib.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1973,11 +1777,6 @@
         <Group>
           <GroupName>STM32F10x_Lib</GroupName>
           <Files>
-            <File>
-              <FileName>system_stm32f10x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\CMSIS-DAP\system_stm32f10x.c</FilePath>
-            </File>
             <File>
               <FileName>stm32f10x_gpio.c</FileName>
               <FileType>1</FileType>
@@ -2022,6 +1821,51 @@
               <FileName>stm32f10x_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\STM32F10x_Lib\src\stm32f10x_spi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USBStack</GroupName>
+          <Files>
+            <File>
+              <FileName>usbd_cdc_acm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_cdc_acm.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_cdc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_hid.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_hid.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_lib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usb_lib.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_msc.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_core_msc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USBStack\src\usbd_core_msc.c</FilePath>
             </File>
           </Files>
         </Group>

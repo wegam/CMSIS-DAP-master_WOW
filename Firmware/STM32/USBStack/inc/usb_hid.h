@@ -47,12 +47,12 @@ typedef __packed struct _HID_DESCRIPTOR {
 
 
 /* HID Request Codes */
-#define HID_REQUEST_GET_REPORT          0x01		//主机用控制传输从设备接收数据，所有HID类设备都要支持这个请求
-#define HID_REQUEST_GET_IDLE            0x02		//主机读取设备当前的空闲速率，设备可以不支持此请求
-#define HID_REQUEST_GET_PROTOCOL        0x03		//主机获得设备的当前活动是引导协议还是报告协议
-#define HID_REQUEST_SET_REPORT          0x09		//设备用控制传输接收主机的数据，设备可以不支持此请求
-#define HID_REQUEST_SET_IDLE            0x0A		//设置闲置状态，设备可不支持此请求
-#define HID_REQUEST_SET_PROTOCOL        0x0B		//在引导协议和报告协议间切换，设备如果支持系统引导（如键盘和鼠标），就必须支持Get_Protocol和Set_Protocol请求
+#define HID_REQUEST_GET_REPORT          0x01
+#define HID_REQUEST_GET_IDLE            0x02
+#define HID_REQUEST_GET_PROTOCOL        0x03
+#define HID_REQUEST_SET_REPORT          0x09
+#define HID_REQUEST_SET_IDLE            0x0A
+#define HID_REQUEST_SET_PROTOCOL        0x0B
 
 /* HID Report Types */
 #define HID_REPORT_INPUT                0x01

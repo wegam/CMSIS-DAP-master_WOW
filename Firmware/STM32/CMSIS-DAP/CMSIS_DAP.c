@@ -68,6 +68,8 @@ uint32_t led_count;
 uint32_t led_timeout;
 int32_t rx_num=0;
 int32_t hid_num=0;
+int32_t hid_numbac=0;
+int32_t hid_time=0;
 int32_t key_num=0;
 int32_t bat_num=0;
 int8_t key_flg=0;
@@ -182,54 +184,67 @@ void main_STM32_CDC(void)
 	
 	while (1)
 	{
-/*		
-//		#ifdef	STM32_CDC			//OLED板
-//			int16_t adc_num=0;			
-//			adc_num=Read_ADC();
-//			if(adc_num!=-1)
-//			{
-//				#ifdef	ADC_TEST			//ADC测试
-////					OLED_ShowString(0,4,"ADC :");
-//					
-//					OLED_ShowNum(40,2,ADC_Result[0],4,16);//显示ASCII字符的码值
-//					OLED_ShowNum(80,2,ADC_Result[1],4,16);//显示ASCII字符的码值		
-//					OLED_ShowNum(40,4,ADC_Result[2],4,16);//显示ASCII字符的码值
-//					OLED_ShowNum(80,4,ADC_Result[3],4,16);//显示ASCII字符的码值
-//				#else
-//					OLED_ShowNum(40,2,ADC_Result[0],11,16);//显示ASCII字符的码值
-//				#endif
-//				OLED_ShowNum(104,0,adc_num,3,16);//显示ASCII字符的码值
-//			}
-//		#endif
 		
 		
-////		if(usb_flg==usb_connected)
-////		{
-//			#ifndef	SWD_TEST
-//				#ifndef	ADC_TEST			//ADC测试
-//					hid_num+=CMSIS_HID_Process();	
-//					#ifdef	STM32_CDC			//OLED板	
-////						OLED_ShowNum(40,4,hid_num,11,16);//显示ASCII字符的码值
-//					#endif			
-//					
-//					#if (USBD_CDC_ACM_ENABLE == 1)
-//						rx_num+=CMSIS_CDC_Process();
-//						#ifdef	STM32_CDC			//OLED板
-////							OLED_ShowNum(40,6,rx_num,11,16);//显示ASCII字符的码值---串口计数
-//						#endif
-//					#endif
-//				#endif
-//			#endif
-////		}
+		#ifdef	STM32_CDC			//OLED板
+			int16_t adc_num=0;			
+			adc_num=Read_ADC();
+			if(adc_num!=-1)
+			{
+				#ifdef	ADC_TEST			//ADC测试
+//					OLED_ShowString(0,4,"ADC :");
+					
+					OLED_ShowNum(40,2,ADC_Result[0],4,16);//显示ASCII字符的码值
+					OLED_ShowNum(80,2,ADC_Result[1],4,16);//显示ASCII字符的码值		
+					OLED_ShowNum(40,4,ADC_Result[2],4,16);//显示ASCII字符的码值
+					OLED_ShowNum(80,4,ADC_Result[3],4,16);//显示ASCII字符的码值
+				#else
+					OLED_ShowNum(40,2,ADC_Result[0],11,16);//显示ASCII字符的码值
+				#endif
+				OLED_ShowNum(104,0,adc_num,3,16);//显示ASCII字符的码值
+			}
+		#endif
+		
+		
+//		if(usb_flg==usb_connected)
+//		{
+			#ifndef	SWD_TEST
+				#ifndef	ADC_TEST			//ADC测试
+					hid_num+=CMSIS_HID_Process();	
+					#ifdef	STM32_CDC			//OLED板
+					if(hid_numbac!=hid_num)
+					{
+						hid_numbac	=	hid_num;
+						hid_time		=	0;
+					}
+					if(hid_time++>100)
+					{
+						hid_time		=	0;
+						OLED_ShowNum(40,4,hid_num,11,16);//显示ASCII字符的码值
+					}
+					#endif			
+					
+					#if (USBD_CDC_ACM_ENABLE == 1)
+						rx_num+=CMSIS_CDC_Process();
+						#ifdef	STM32_CDC			//OLED板
+							OLED_ShowNum(40,6,rx_num,11,16);//显示ASCII字符的码值---串口计数
+						#endif
+					#endif
+				#endif
+			#endif
+//		}
 
-*/	
+		if(hid_num>999999)
+			hid_num=0;
+		if(rx_num>999999)
+			rx_num=0;
 		
 		//————————————————————————————OLED显示
-		WOW_DISPALY_Event();	
+//		WOW_DISPALY_Event();	
 		//————————————————————————————输入检测/按键/充电状态
-		WOW_KEY_Event();	
+//		WOW_KEY_Event();	
 //		//————————————————————————————USB数据处理
-		WOW_USB_Event();
+//		WOW_USB_Event();
 	}
 
 }
@@ -355,8 +370,8 @@ void main_USB_TEST(void)
 		#endif
 		
 		
-//		if(usb_flg==usb_connected)
-//		{
+		if(usb_flg==usb_connected)
+		{
 			#ifndef	SWD_TEST
 				#ifndef	ADC_TEST			//ADC测试
 					hid_num+=CMSIS_HID_Process();	
@@ -367,12 +382,12 @@ void main_USB_TEST(void)
 					#if (USBD_CDC_ACM_ENABLE == 1)
 						rx_num+=CMSIS_CDC_Process();
 						#ifdef	STM32_CDC			//OLED板
-//							OLED_ShowNum(40,6,rx_num,11,16);//显示ASCII字符的码值---串口计数
+							OLED_ShowNum(40,6,rx_num,11,16);//显示ASCII字符的码值---串口计数
 						#endif
 					#endif
 				#endif
 			#endif
-//		}
+		}
 
 		#ifndef	USB_TEST
 			#ifndef	STM32_CDC			//OLED板
@@ -387,9 +402,9 @@ void main_USB_TEST(void)
 		
 		
 		//————————————————————————————OLED显示
-		WOW_DISPALY_Event();	
+//		WOW_DISPALY_Event();	
 		//————————————————————————————输入检测/按键/充电状态
-		WOW_KEY_Event();	
+//		WOW_KEY_Event();	
 		//————————————————————————————USB数据处理
 //		WOW_USB_Event();
 	}
@@ -588,24 +603,24 @@ void WOW_KEY_Event(void)
 *******************************************************************************/
 void WOW_USB_Event(void)
 {
-//		if(usb_flg==usb_connected)
-//		{
+		if(usb_flg==usb_connected)
+		{
 			#ifndef	SWD_TEST
 				#ifndef	ADC_TEST			//ADC测试
 					hid_num+=CMSIS_HID_Process();	
 					#ifdef	STM32_CDC			//OLED板	
-//						OLED_ShowNum(40,4,hid_num,11,16);//显示ASCII字符的码值
+						OLED_ShowNum(40,4,hid_num,11,16);//显示ASCII字符的码值
 					#endif			
 					
 					#if (USBD_CDC_ACM_ENABLE == 1)
 						rx_num+=CMSIS_CDC_Process();
 						#ifdef	STM32_CDC			//OLED板
-//							OLED_ShowNum(40,6,rx_num,11,16);//显示ASCII字符的码值---串口计数
+							OLED_ShowNum(40,6,rx_num,11,16);//显示ASCII字符的码值---串口计数
 						#endif
 					#endif
 				#endif
 			#endif
-//		}
+		}
 }
 /*******************************************************************************
 *函数名			:	DISPALY_INIT
@@ -668,6 +683,8 @@ void WOW_DISPALY_INIT(void)
 		OLED_ShowString(0,2,"VBAT:");
 		OLED_ShowString(0,4,"HID :");
 		OLED_ShowString(0,6,"UART:");
+//		OLED_ShowString(0,6,"RX:");
+//		OLED_ShowString(64,6,"TX:");
 	#else
 //		#error "Board undefined"
 	OLED_ShowString(0,0,"Board undefined");

@@ -1139,17 +1139,15 @@ __weak   void USBD_EndPoint15        (U32 event);
 #endif
 
 /* USB Device - Endpoint Events Callback Pointers */
-void (* const USBD_P_EP[16])	(U32 event) = 
-{
+void (* const USBD_P_EP[16])         (U32 event) = {
   USBD_EndPoint0,			//配置端点--USB配置--控制传输
-  USBD_EndPoint1,			//CDC端点--空函数--中断传输										//void USBD_CDC_ACM_EP_INTIN_Event (uint32_t event)
-//	USBD_CDC_ACM_EP_INTIN_Event,	//  USBD_EndPoint1								//Abstract Control Model
-  USBD_EndPoint2,			//CDC输出端点--批量传输										//void USBD_CDC_ACM_EP_BULK_Event (uint32_t event)
-//	USBD_CDC_ACM_EP_BULK_Event,	//USBD_EndPoint2
-  USBD_EndPoint3,			//HID端点--空函数//数据的接收和发送处理--中断传输		//void USBD_HID_EP_INT_Event (U32 event)
-//	USBD_HID_EP_INT_Event,	//USBD_EndPoint3
+//  USBD_EndPoint1,			//CDC端点--空函数--中断传输										//void USBD_CDC_ACM_EP_INTIN_Event (uint32_t event)
+	USBD_CDC_ACM_EP_INTIN_Event,	//  USBD_EndPoint1								//Abstract Control Model
+//  USBD_EndPoint2,			//CDC输出端点--批量传输										//void USBD_CDC_ACM_EP_BULK_Event (uint32_t event)
+	USBD_CDC_ACM_EP_BULK_Event,	//USBD_EndPoint2
+//  USBD_EndPoint3,			//HID端点--空函数//数据的接收和发送处理--中断传输		//void USBD_HID_EP_INT_Event (U32 event)
+	USBD_HID_EP_INT_Event,	//USBD_EndPoint3
   USBD_EndPoint4,
-//	USBD_MSC_EP_BULK_Event,		//USBD_EndPoint4,
   USBD_EndPoint5,
   USBD_EndPoint6,
   USBD_EndPoint7,

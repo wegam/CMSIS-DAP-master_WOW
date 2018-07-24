@@ -10,21 +10,20 @@
 
 #ifndef __USBREG_H
 #define __USBREG_H
-#include "RTL.h"
 
 
 #define REG(x)  (*((volatile unsigned int *)(x)))
 
-#define USB_BASE_ADDR   0x40005C00  /* USB Registers Base Address */		//USBÄ£¿é»ùµØÖ·--0x40005C00
+#define USB_BASE_ADDR   0x40005C00  /* USB Registers Base Address */
 #define USB_PMA_ADDR    0x40006000  /* USB Packet Memory Area Address */
 
 
 /* Common Registers */
-#define CNTR    REG(USB_BASE_ADDR + 0x40)   /* Control Register */							//USB¿ØÖÆ¼Ä´æÆ÷
-#define ISTR    REG(USB_BASE_ADDR + 0x44)   /* Interrupt Status Register */			//USBÖÐ¶Ï×´Ì¬¼Ä´æÆ÷
-#define FNR     REG(USB_BASE_ADDR + 0x48)   /* Frame Number Register */					//USBÖ¡±àºÅ¼Ä´æÆ÷
-#define DADDR   REG(USB_BASE_ADDR + 0x4C)   /* Device Address Register */				//USBÉè±¸µØÖ·¼Ä´æÆ÷
-#define BTABLE  REG(USB_BASE_ADDR + 0x50)   /* Buffer Table Address Register */	//USB·Ö×é»º³åÇøÃèÊö±íµØÖ·¼Ä´æÆ÷
+#define CNTR    REG(USB_BASE_ADDR + 0x40)   /* Control Register */
+#define ISTR    REG(USB_BASE_ADDR + 0x44)   /* Interrupt Status Register */
+#define FNR     REG(USB_BASE_ADDR + 0x48)   /* Frame Number Register */
+#define DADDR   REG(USB_BASE_ADDR + 0x4C)   /* Device Address Register */
+#define BTABLE  REG(USB_BASE_ADDR + 0x50)   /* Buffer Table Address Register */
 
 /* CNTR: Control Register Bit Definitions */
 #define CNTR_CTRM       0x8000      /* Correct Transfer Interrupt Mask */
