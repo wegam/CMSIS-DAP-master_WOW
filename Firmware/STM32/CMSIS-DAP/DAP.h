@@ -169,22 +169,25 @@ typedef struct
 	uint8_t	 debug_port;			// Debug Port						//调试接口-SWD：1/JATG：2
 	uint8_t	 fast_clock;			// Fast Clock Flag			//高速时钟标志
 	uint32_t	clock_delay;		// Clock Delay					//时钟廷迟
-	struct {						// Transfer Configuration			//传输配置
+	struct	// Transfer Configuration			//传输配置
+	{						
 		uint8_t	idle_cycles;		// Idle cycles after transfer		//传输后空闲周期
 		uint16_t  retry_count;		// Number of retries after WAIT response	//在等待响应的重试次数
 		uint16_t  match_retry;		// Number of retries if read value does not match	//如果读取的值不匹配时的重试次数
 		uint32_t  match_mask;		// Match Mask		//匹配标志
-	} transfer;
+	}transfer;
 
 #if (DAP_SWD != 0)
-	struct {						// SWD Configuration
+	struct
+	{						// SWD Configuration
 		uint8_t		turnaround;		// Turnaround period		//周转期
 		uint8_t		data_phase;		// Always generate Data Phase	//总是生成数据相位
-	} swd_conf;
+	}swd_conf;
 #endif
 
 #if (DAP_JTAG != 0)
-	struct {						// JTAG Device Chain
+	struct
+	{						// JTAG Device Chain
 		uint8_t		count;			// Number of devices
 		uint8_t		index;			// Device index (device at TDO has index 0)
 #if (DAP_JTAG_DEV_CNT != 0)
@@ -192,12 +195,12 @@ typedef struct
 		uint16_t  ir_before[DAP_JTAG_DEV_CNT];	// Bits before IR
 		uint16_t  ir_after [DAP_JTAG_DEV_CNT];	// Bits after IR
 #endif
-	} jtag_dev;
+	}jtag_dev;
 #endif
 
 } DAP_Data_t;
 
-extern		  DAP_Data_t DAP_Data;			// DAP Data
+extern		  		DAP_Data_t DAP_Data;			// DAP Data
 extern volatile uint8_t	DAP_TransferAbort;	// Transfer Abort Flag
 
 
@@ -218,58 +221,30 @@ static uint32_t DAP_ResetTarget(uint8_t *response);
 
 #if ((DAP_SWD != 0) || (DAP_JTAG != 0))
 static uint32_t DAP_SWJ_Pins(uint8_t *request, uint8_t *response);		//SWD时主要为复位
-#endif
-
-#if ((DAP_SWD != 0) || (DAP_JTAG != 0))
 static uint32_t DAP_SWJ_Clock(uint8_t *request, uint8_t *response);
-#endif
-
-#if ((DAP_SWD != 0) || (DAP_JTAG != 0))
 static uint32_t DAP_SWJ_Sequence(uint8_t *request, uint8_t *response);
 #endif
 
+
 #if (DAP_SWD != 0)
 static uint32_t DAP_SWD_Configure(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_SWD != 0)
 static uint32_t DAP_SWD_Abort(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_JTAG != 0)
-static uint32_t DAP_JTAG_Sequence(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_JTAG != 0)
-static uint32_t DAP_JTAG_Configure(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_JTAG != 0)
-static uint32_t DAP_JTAG_IDCode(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_JTAG != 0)
-static uint32_t DAP_JTAG_Abort(uint8_t *request, uint8_t *response);
-#endif
-
-static uint32_t DAP_TransferConfigure(uint8_t *request, uint8_t *response);
-
-#if (DAP_SWD != 0)
 static uint32_t DAP_SWD_Transfer(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_JTAG != 0)
-static uint32_t DAP_JTAG_Transfer(uint8_t *request, uint8_t *response);
-#endif
-
-#if (DAP_SWD != 0)
 static uint32_t DAP_SWD_TransferBlock(uint8_t *request, uint8_t *response);
 #endif
 
+
+
 #if (DAP_JTAG != 0)
+static uint32_t DAP_JTAG_Sequence(uint8_t *request, uint8_t *response);
+static uint32_t DAP_JTAG_Configure(uint8_t *request, uint8_t *response);
+static uint32_t DAP_JTAG_IDCode(uint8_t *request, uint8_t *response);
+static uint32_t DAP_JTAG_Abort(uint8_t *request, uint8_t *response);
+static uint32_t DAP_JTAG_Transfer(uint8_t *request, uint8_t *response);
 static uint32_t DAP_JTAG_TransferBlock(uint8_t *request, uint8_t *response);
 #endif
 
+static uint32_t DAP_TransferConfigure(uint8_t *request, uint8_t *response);
 
 extern void		SWJ_Sequence	(uint32_t count, uint8_t *data);
 extern void		JTAG_Sequence	(uint32_t info,  uint8_t *tdi, uint8_t *tdo);

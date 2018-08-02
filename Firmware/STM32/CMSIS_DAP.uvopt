@@ -323,7 +323,7 @@
         <periodic>1</periodic>
         <aLwin>0</aLwin>
         <aCover>0</aCover>
-        <aSer1>0</aSer1>
+        <aSer1>1</aSer1>
         <aSer2>0</aSer2>
         <aPa>0</aPa>
         <viewmode>1</viewmode>
@@ -1080,10 +1080,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>25</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>196</TopLine>
-      <CurrentLine>220</CurrentLine>
+      <TopLine>6</TopLine>
+      <CurrentLine>48</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\CMSIS_DAP.c</PathWithFileName>
       <FilenameWithoutPath>CMSIS_DAP.c</FilenameWithoutPath>
@@ -1096,10 +1096,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>391</TopLine>
+      <CurrentLine>404</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\CMSIS_Conf.c</PathWithFileName>
       <FilenameWithoutPath>CMSIS_Conf.c</FilenameWithoutPath>
@@ -1112,10 +1112,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>17</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>9</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\CMSIS_HID.c</PathWithFileName>
       <FilenameWithoutPath>CMSIS_HID.c</FilenameWithoutPath>
@@ -1130,8 +1130,8 @@
       <Focus>0</Focus>
       <ColumnNumber>59</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>36</TopLine>
-      <CurrentLine>56</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\CMSIS_CDC.c</PathWithFileName>
       <FilenameWithoutPath>CMSIS_CDC.c</FilenameWithoutPath>
@@ -1192,10 +1192,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>22</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>94</TopLine>
-      <CurrentLine>29</CurrentLine>
+      <TopLine>518</TopLine>
+      <CurrentLine>536</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\SWD_WOW.c</PathWithFileName>
       <FilenameWithoutPath>SWD_WOW.c</FilenameWithoutPath>
@@ -1264,7 +1264,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>37</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
@@ -1280,7 +1280,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>25</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
@@ -1296,7 +1296,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
@@ -1312,10 +1312,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>21</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>230</TopLine>
+      <CurrentLine>259</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\usbd_user_hid.c</PathWithFileName>
       <FilenameWithoutPath>usbd_user_hid.c</FilenameWithoutPath>
@@ -1328,10 +1328,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>18</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>1</TopLine>
+      <CurrentLine>18</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\UserApp.c</PathWithFileName>
       <FilenameWithoutPath>UserApp.c</FilenameWithoutPath>
@@ -1344,10 +1344,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>27</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>278</TopLine>
+      <CurrentLine>294</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\DAP.c</PathWithFileName>
       <FilenameWithoutPath>DAP.c</FilenameWithoutPath>
@@ -1360,10 +1360,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>125</TopLine>
+      <CurrentLine>126</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\SW_DP.c</PathWithFileName>
       <FilenameWithoutPath>SW_DP.c</FilenameWithoutPath>
@@ -1376,10 +1376,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>319</TopLine>
+      <CurrentLine>1</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\CMSIS-DAP\JTAG_DP.c</PathWithFileName>
       <FilenameWithoutPath>JTAG_DP.c</FilenameWithoutPath>
@@ -1402,8 +1402,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>64</TopLine>
-      <CurrentLine>83</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Display\oled.c</PathWithFileName>
       <FilenameWithoutPath>oled.c</FilenameWithoutPath>
@@ -1458,8 +1458,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>365</TopLine>
-      <CurrentLine>380</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\STM32F10x_Lib\src\stm32f10x_gpio.c</PathWithFileName>
       <FilenameWithoutPath>stm32f10x_gpio.c</FilenameWithoutPath>
@@ -1504,10 +1504,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>841</TopLine>
+      <CurrentLine>858</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\STM32F10x_Lib\src\stm32f10x_flash.c</PathWithFileName>
       <FilenameWithoutPath>stm32f10x_flash.c</FilenameWithoutPath>
@@ -1672,7 +1672,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
@@ -1704,7 +1704,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2625684</ColumnNumber>
+      <ColumnNumber>4</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
@@ -1746,8 +1746,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>134</TopLine>
-      <CurrentLine>151</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\Startup\startup_stm32f10x_hd.s</PathWithFileName>
       <FilenameWithoutPath>startup_stm32f10x_hd.s</FilenameWithoutPath>

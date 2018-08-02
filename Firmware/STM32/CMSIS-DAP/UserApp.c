@@ -15,7 +15,8 @@ void UserAppInit(CoreDescriptor_t *core);
 void UserAppAbort(void);
 
 __attribute__((section("USERINIT")))
-const UserAppDescriptor_t UserAppDescriptor = {
+const UserAppDescriptor_t UserAppDescriptor = 
+{
 	&UserAppInit,
 	&DAP_ProcessCommand,
 	&UserAppAbort
