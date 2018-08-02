@@ -25,7 +25,8 @@
  *    Return Value:    None
  */
 
-__weak void USBD_ReqClrFeature_MSC (U32 EPNum) {
+__weak void USBD_ReqClrFeature_MSC (U32 EPNum)
+{
   USBD_MSC_ClrStallEP (EPNum);
 }
 

@@ -93,7 +93,8 @@ void USBD_MSC_ClrStallEP (U32 EPNum) {     /* clear EP halt status according sta
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_MSC_Reset (void) {
+BOOL USBD_MSC_Reset (void)
+{
 
   USBD_EndPointStall = 0x00000000;         /* EP must stay stalled */
   USBD_MSC_CSW.dSignature = 0;             /* invalid signature */
@@ -111,7 +112,8 @@ BOOL USBD_MSC_Reset (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_MSC_GetMaxLUN (void) {
+BOOL USBD_MSC_GetMaxLUN (void)
+{
 
   USBD_EP0Buf[0] = 0;                      /* one LUN associated with this device */
   return (__TRUE);
@@ -124,7 +126,8 @@ BOOL USBD_MSC_GetMaxLUN (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_MSC_CheckMedia (void) {
+BOOL USBD_MSC_CheckMedia (void)
+{
 
   USBD_MSC_MediaReadyEx = USBD_MSC_MediaReady;
   if (!USBD_MSC_MediaReady)

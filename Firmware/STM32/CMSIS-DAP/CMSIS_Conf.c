@@ -471,13 +471,15 @@ void LED_Configuration(void)
 {
 //	GPIO_InitTypeDef GPIO_InitStructure;
 	
-	GPIO_InitTypeDef INIT_LED_CONNECTED = {
+	GPIO_InitTypeDef INIT_LED_CONNECTED =
+	{
 		(LED_CONNECTED),
 		GPIO_Speed_2MHz,
 		GPIO_Mode_Out_PP
 	};
 	
-	GPIO_InitTypeDef INIT_LED_RUNNING = {
+	GPIO_InitTypeDef INIT_LED_RUNNING =
+	{
 		(LED_RUNNING),
 		GPIO_Speed_2MHz,
 		GPIO_Mode_Out_PP
@@ -513,7 +515,8 @@ void USB_CONNECTED_SETUP(void)
 	
 	/* Control USB connecting via SW	*/
 	#ifdef USB_CONNECTED_PORT
-	const GPIO_InitTypeDef INIT_PIN_USB_CONNECT = {
+	const GPIO_InitTypeDef INIT_PIN_USB_CONNECT =
+	{
 		USB_CONNECTED,
 		GPIO_Speed_50MHz,
 		GPIO_Mode_Out_PP
@@ -549,12 +552,14 @@ void USB_CONNECTED_SETUP(void)
 void PORT_JTAG_SETUP(void)
 {
 	#if ( DAP_JTAG != 0 )
-	const GPIO_InitTypeDef INIT_JTAG_IN = {
+	const GPIO_InitTypeDef INIT_JTAG_IN =
+	{
 		PIN_TDO,
 		(GPIOSpeed_TypeDef)0,
 		GPIO_Mode_IPU
 	};
-	const GPIO_InitTypeDef INIT_JTAG_OUT = {
+	const GPIO_InitTypeDef INIT_JTAG_OUT =
+	{
 		PIN_SWCLK_TCK | PIN_SWDIO_TMS | PIN_TDI,
 		GPIO_Speed_50MHz,
 		GPIO_Mode_Out_PP
@@ -612,7 +617,7 @@ void PORT_SWD_SETUP(void)
 }
 
 /*******************************************************************************
-*函数名			:	DAP_SWD
+*函数名			:	PORT_OFF
 *功能描述		:	函数功能说明
 *输入				: 
 *返回值			:	无

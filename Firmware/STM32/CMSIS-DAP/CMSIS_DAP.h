@@ -34,8 +34,8 @@ void USBD_Error_Event(void);
 void WOW_KEY_Event(void);
 void WOW_USB_Event(void);
 void WOW_USB_INIT(void);				//USB初始化
+
 void WOW_DISPALY_INIT(void);		//初始化显示内容
 void WOW_DISPALY_Event(void);
-
 
 #endif  /* __DAP_H__ */

@@ -12,6 +12,7 @@
 #ifndef __USB_DEF_H__
 #define __USB_DEF_H__
 
+#include "stdint.h"
 #pragma anon_unions
 
 
@@ -33,9 +34,9 @@
 
 /* bmRequestType Definition */
 typedef __packed struct _REQUEST_TYPE {
-  U8 Recipient : 5;                     /* D4..0: Recipient */										//D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
-  U8 Type      : 2;                     /* D6..5: Type */													//D[6:5]-类型：0＝标准，1＝群组，2＝供应商3＝保留
-  U8 Dir       : 1;                     /* D7:    Data Phase Txsfer Direction */	//D7-数据传输方向：0＝主机至设备，1＝设备至主机
+  uint8_t Recipient : 5;                     /* D4..0: Recipient */										//D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
+  uint8_t Type      : 2;                     /* D6..5: Type */													//D[6:5]-类型：0＝标准，1＝群组，2＝供应商3＝保留
+  uint8_t Dir       : 1;                     /* D7:    Data Phase Txsfer Direction */	//D7-数据传输方向：0＝主机至设备，1＝设备至主机
 } REQUEST_TYPE;
 
 /* USB Standard Request Codes */		//标准请求代码
@@ -61,24 +62,29 @@ typedef __packed struct _REQUEST_TYPE {
 #define USB_FEATURE_REMOTE_WAKEUP              1		//远程唤醒
 
 /* USB Default Control Pipe Setup Packet */
-typedef __packed struct _USB_SETUP_PACKET {
+typedef __packed struct _USB_SETUP_PACKET
+{
   REQUEST_TYPE bmRequestType;           /* bmRequestType */	//USB设备请求类型
-  U8  bRequest;                         /* bRequest */			//特定请求
-  __packed union {
-    U16        wValue;                  /* wValue */
-    __packed struct {
-      U8         wValueL;
-      U8         wValueH;
+  uint8_t  bRequest;                         /* bRequest */			//特定请求
+  __packed union
+	{
+    uint16_t        wValue;                  /* wValue */
+    __packed struct
+		{
+      uint8_t         wValueL;
+      uint8_t         wValueH;
     };
   };
-  __packed union {
-    U16        wIndex;                  /* wIndex */
-    __packed struct {
-      U8         wIndexL;
-      U8         wIndexH;
+  __packed union
+	{
+    uint16_t        wIndex;                  /* wIndex */
+    __packed struct
+		{
+      uint8_t         wIndexL;
+      uint8_t         wIndexH;
     };
   };
-  U16          wLength;                 /* wLength */
+  uint16_t          wLength;                 /* wLength */
 } USB_SETUP_PACKET;
 
 
@@ -144,93 +150,93 @@ typedef __packed struct _USB_SETUP_PACKET {
 /* USB Standard Device Descriptor */
 typedef __packed struct _USB_DEVICE_DESCRIPTOR
 {
-  U8  bLength;						//描述设备描述符的总字节数
-  U8  bDescriptorType;		//描述符的类型（为0X01，这里是设备描述符）
-  U16 bcdUSB;							//这个设备兼容的USB设备版本号
-  U8  bDeviceClass;				//设备类码：是由USB 协会规定的，描述的是接口所能实现的功能。当此域为0时下面的子类也必须为0，当为0XFF表示的是厂商自定义设备类
-  U8  bDeviceSubClass;		//子类代码码：这个码值的意思是根据设备类码来看。如设备类码为零，这字段也要零，如设备类码为0XFF，此域的所有值保留。	
-  U8  bDeviceProtocol;		//协议码：这些码的值视设备码和子类代码的值而定。当该字段为0是，表示设备不使用类所定义的协议， 当该字段的值为0XFF时，表示使用设备厂商自定义的协议	
-  U8  bMaxPacketSize0;		//端点0的能缓冲的最大数据包大小
-  U16 idVendor;						//生产设备厂家的标志（由USB 相关组织给的）
-  U16 idProduct;					//产品标志（由生产的厂家自己做编号）
-  U16 bcdDevice;					//设备的版本号
-  U8  iManufacturer;			//描述生产设备厂家的信息的字符串描述符的索引值。
-  U8  iProduct;						//描述所使用设备产品的信息的字串描述符的索引值。
-  U8  iSerialNumber;			//描述设备产品的序列号信息的字串描述符的索引值。
-  U8  bNumConfigurations;	//设备有多少种配置
+  uint8_t  bLength;						//描述设备描述符的总字节数
+  uint8_t  bDescriptorType;		//描述符的类型（为0X01，这里是设备描述符）
+  uint16_t bcdUSB;							//这个设备兼容的USB设备版本号
+  uint8_t  bDeviceClass;				//设备类码：是由USB 协会规定的，描述的是接口所能实现的功能。当此域为0时下面的子类也必须为0，当为0XFF表示的是厂商自定义设备类
+  uint8_t  bDeviceSubClass;		//子类代码码：这个码值的意思是根据设备类码来看。如设备类码为零，这字段也要零，如设备类码为0XFF，此域的所有值保留。	
+  uint8_t  bDeviceProtocol;		//协议码：这些码的值视设备码和子类代码的值而定。当该字段为0是，表示设备不使用类所定义的协议， 当该字段的值为0XFF时，表示使用设备厂商自定义的协议	
+  uint8_t  bMaxPacketSize0;		//端点0的能缓冲的最大数据包大小
+  uint16_t idVendor;						//生产设备厂家的标志（由USB 相关组织给的）
+  uint16_t idProduct;					//产品标志（由生产的厂家自己做编号）
+  uint16_t bcdDevice;					//设备的版本号
+  uint8_t  iManufacturer;			//描述生产设备厂家的信息的字符串描述符的索引值。
+  uint8_t  iProduct;						//描述所使用设备产品的信息的字串描述符的索引值。
+  uint8_t  iSerialNumber;			//描述设备产品的序列号信息的字串描述符的索引值。
+  uint8_t  bNumConfigurations;	//设备有多少种配置
 } USB_DEVICE_DESCRIPTOR;
 
 /* USB 2.0 Device Qualifier Descriptor */
 typedef __packed struct _USB_DEVICE_QUALIFIER_DESCRIPTOR {
-  U8  bLength;
-  U8  bDescriptorType;
-  U16 bcdUSB;
-  U8  bDeviceClass;
-  U8  bDeviceSubClass;
-  U8  bDeviceProtocol;
-  U8  bMaxPacketSize0;
-  U8  bNumConfigurations;
-  U8  bReserved;
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint16_t bcdUSB;
+  uint8_t  bDeviceClass;
+  uint8_t  bDeviceSubClass;
+  uint8_t  bDeviceProtocol;
+  uint8_t  bMaxPacketSize0;
+  uint8_t  bNumConfigurations;
+  uint8_t  bReserved;
 } USB_DEVICE_QUALIFIER_DESCRIPTOR;
 
 /* USB Standard Configuration Descriptor */
 typedef __packed struct _USB_CONFIGURATION_DESCRIPTOR {
-  U8  bLength;
-  U8  bDescriptorType;
-  U16 wTotalLength;
-  U8  bNumInterfaces;
-  U8  bConfigurationValue;
-  U8  iConfiguration;
-  U8  bmAttributes;
-  U8  bMaxPower;
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint16_t wTotalLength;
+  uint8_t  bNumInterfaces;
+  uint8_t  bConfigurationValue;
+  uint8_t  iConfiguration;
+  uint8_t  bmAttributes;
+  uint8_t  bMaxPower;
 } USB_CONFIGURATION_DESCRIPTOR;
 
 /* USB Standard Interface Descriptor */
 typedef __packed struct _USB_INTERFACE_DESCRIPTOR {
-  U8  bLength;							/* bLength */							//接口描述符的字节数大小
-  U8  bDescriptorType;			/* bDescriptorType */			//接口描述符的类型编号
-  U8  bInterfaceNumber;			/* bInterfaceNumber */		//该接口的编号
-  U8  bAlternateSetting;		/* bAlternateSetting */		//备用的接口描述符编号
-  U8  bNumEndpoints;				/* bNumEndpoints */				//该接口使用的端点数，不包括端点0
-  U8  bInterfaceClass;			/* bInterfaceClass */			//接口类型
-  U8  bInterfaceSubClass;		/* bInterfaceSubClass */	//接口子类型
-  U8  bInterfaceProtocol;		/* bInterfaceProtocol */	//接口遵循的协议
-  U8  iInterface;						/* iInterface */					//描述该接口的字符串索引值
+  uint8_t  bLength;							/* bLength */							//接口描述符的字节数大小
+  uint8_t  bDescriptorType;			/* bDescriptorType */			//接口描述符的类型编号
+  uint8_t  bInterfaceNumber;		/* bInterfaceNumber */		//该接口的编号
+  uint8_t  bAlternateSetting;		/* bAlternateSetting */		//备用的接口描述符编号
+  uint8_t  bNumEndpoints;				/* bNumEndpoints */				//该接口使用的端点数，不包括端点0
+  uint8_t  bInterfaceClass;			/* bInterfaceClass */			//接口类型
+  uint8_t  bInterfaceSubClass;	/* bInterfaceSubClass */	//接口子类型
+  uint8_t  bInterfaceProtocol;	/* bInterfaceProtocol */	//接口遵循的协议
+  uint8_t  iInterface;					/* iInterface */					//描述该接口的字符串索引值
 } USB_INTERFACE_DESCRIPTOR;
 
 /* USB Standard Endpoint Descriptor */
 typedef __packed struct _USB_ENDPOINT_DESCRIPTOR {
-  U8  bLength;
-  U8  bDescriptorType;
-  U8  bEndpointAddress;
-  U8  bmAttributes;
-  U16 wMaxPacketSize;
-  U8  bInterval;
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint8_t  bEndpointAddress;
+  uint8_t  bmAttributes;
+  uint16_t wMaxPacketSize;
+  uint8_t  bInterval;
 } USB_ENDPOINT_DESCRIPTOR;
 
 /* USB String Descriptor */
 typedef __packed struct _USB_STRING_DESCRIPTOR {
-  U8  bLength;
-  U8  bDescriptorType;
-  U16 bString/*[]*/;
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
+  uint16_t bString/*[]*/;
 } USB_STRING_DESCRIPTOR;
 
 /* USB Common Descriptor */
 typedef __packed struct _USB_COMMON_DESCRIPTOR {
-  U8  bLength;
-  U8  bDescriptorType;
+  uint8_t  bLength;
+  uint8_t  bDescriptorType;
 } USB_COMMON_DESCRIPTOR;
 
 /* USB Interface Association Descriptor */	//USB复合设备一般用Interface Association Descriptor（IAD）实现，就是在要合并的接口前加上IAD描述符。
 typedef __packed struct _USB_INTERFACE_ASSOCIATION_DESCRIPTOR {
-  U8  bLength;							/* bLength */						//描述符大小
-  U8  bDescriptorType;			/* bDescriptorType */		//IAD描述符类型
-  U8  bFirstInterface;			/* bFirstInterface */		//起始接口	
-  U8  bInterfaceCount;			/* bInterfaceCount */		//接口数
-  U8  bFunctionClass;				/* bFunctionClass */		//类型代码
-  U8  bFunctionSubclass;		/* bFunctionSubclass */	//子类型代码
-  U8  bFunctionProtocol;		/* bFunctionProtocol */	//协议代码
-  U8  iFunction;						/* iFunction */					//描述字符串索引
+  uint8_t  bLength;							/* bLength */						//描述符大小
+  uint8_t  bDescriptorType;			/* bDescriptorType */		//IAD描述符类型
+  uint8_t  bFirstInterface;			/* bFirstInterface */		//起始接口	
+  uint8_t  bInterfaceCount;			/* bInterfaceCount */		//接口数
+  uint8_t  bFunctionClass;				/* bFunctionClass */		//类型代码
+  uint8_t  bFunctionSubclass;		/* bFunctionSubclass */	//子类型代码
+  uint8_t  bFunctionProtocol;		/* bFunctionProtocol */	//协议代码
+  uint8_t  iFunction;						/* iFunction */					//描述字符串索引
 } USB_INTERFACE_ASSOCIATION_DESCRIPTOR;
 
 

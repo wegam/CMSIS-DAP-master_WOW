@@ -70,7 +70,8 @@ void usbd_init (void)
  *    Parameters:      con:   Connect/Disconnect
  *    Return Value:    None
  */
-void usbd_connect (BOOL con) {
+void usbd_connect (BOOL con)
+{
     USBD_Connect (con);
 }
 
@@ -504,7 +505,8 @@ __inline BOOL USBD_ReqGetDescriptor (void)		//获取设备描述符
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-__inline BOOL USBD_ReqGetConfiguration (void) {
+__inline BOOL USBD_ReqGetConfiguration (void)
+{
 
   switch (USBD_SetupPacket.bmRequestType.Recipient)	//判断请求端口 //D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
 	{
@@ -540,28 +542,39 @@ __inline BOOL USBD_ReqSetConfiguration (void)
     case REQUEST_TO_DEVICE:
 
       if (USBD_SetupPacket.wValueL) {
-        if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE)) {
+        if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE))
+				{
           return (__FALSE);  /* High speed request but high-speed not enabled */
         }
-        if (USBD_HighSpeed == __FALSE) {
+        if (USBD_HighSpeed == __FALSE)
+				{
           pD = (USB_CONFIGURATION_DESCRIPTOR *)USBD_ConfigDescriptor;
-        } else {
+        }
+				else
+				{
           pD = (USB_CONFIGURATION_DESCRIPTOR *)USBD_ConfigDescriptor_HS;
         }
-        while (pD->bLength) {
-          switch (pD->bDescriptorType) {
+        while (pD->bLength)
+				{
+          switch (pD->bDescriptorType)
+					{
             case USB_CONFIGURATION_DESCRIPTOR_TYPE:
-              if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue == USBD_SetupPacket.wValueL) {
+              if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue == USBD_SetupPacket.wValueL)
+							{
                 USBD_Configuration = USBD_SetupPacket.wValueL;			//USB配置完成标志
                 USBD_NumInterfaces = ((USB_CONFIGURATION_DESCRIPTOR *)pD)->bNumInterfaces;
-                for (n = 0; n < usbd_if_num; n++) {
+                for (n = 0; n < usbd_if_num; n++)
+								{
                   USBD_AltSetting[n] = 0;
                 }
-                for (n = 1; n < 16; n++) {
-                  if (USBD_EndPointMask & (1 << n)) {
+                for (n = 1; n < 16; n++)
+								{
+                  if (USBD_EndPointMask & (1 << n))
+									{
                     USBD_DisableEP(n);
                   }
-                  if (USBD_EndPointMask & ((1 << 16) << n)) {
+                  if (USBD_EndPointMask & ((1 << 16) << n))
+									{
                     USBD_DisableEP(n | 0x80);
                   }
                 }
@@ -569,12 +582,17 @@ __inline BOOL USBD_ReqSetConfiguration (void)
                 USBD_EndPointHalt = 0x00000000;
                 USBD_EndPointStall= 0x00000000;
                 USBD_Configure(__TRUE);
-                if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bmAttributes & USB_CONFIG_POWERED_MASK) {
+                if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bmAttributes & USB_CONFIG_POWERED_MASK)
+								{
                   USBD_DeviceStatus |=  USB_GETSTATUS_SELF_POWERED;
-                } else {
+                }
+								else
+								{
                   USBD_DeviceStatus &= ~USB_GETSTATUS_SELF_POWERED;
                 }
-              } else {
+              }
+							else
+							{
                 pD = (USB_CONFIGURATION_DESCRIPTOR *)((U8 *)pD + ((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength);
                 continue;
               }
@@ -583,7 +601,8 @@ __inline BOOL USBD_ReqSetConfiguration (void)
               alt = ((USB_INTERFACE_DESCRIPTOR *)pD)->bAlternateSetting;
               break;
             case USB_ENDPOINT_DESCRIPTOR_TYPE:
-              if (alt == 0) {
+              if (alt == 0)
+							{
                 n = ((USB_ENDPOINT_DESCRIPTOR *)pD)->bEndpointAddress & 0x8F;
                 m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
                 USBD_EndPointMask |= m;
@@ -596,13 +615,17 @@ __inline BOOL USBD_ReqSetConfiguration (void)
           pD = (USB_CONFIGURATION_DESCRIPTOR *)((U8 *)pD + pD->bLength);
         }
       }
-      else {
+      else
+			{
         USBD_Configuration = 0;
-        for (n = 1; n < 16; n++) {
-          if (USBD_EndPointMask & (1 << n)) {
+        for (n = 1; n < 16; n++)
+				{
+          if (USBD_EndPointMask & (1 << n))
+					{
             USBD_DisableEP(n);
           }
-          if (USBD_EndPointMask & ((1 << 16) << n)) {
+          if (USBD_EndPointMask & ((1 << 16) << n))
+					{
             USBD_DisableEP(n | 0x80);
           }
         }
@@ -612,7 +635,8 @@ __inline BOOL USBD_ReqSetConfiguration (void)
         USBD_Configure(__FALSE);
       }
 
-      if (USBD_Configuration != USBD_SetupPacket.wValueL) {
+      if (USBD_Configuration != USBD_SetupPacket.wValueL)
+			{
         return (__FALSE);
       }
       break;
@@ -640,9 +664,12 @@ __inline BOOL USBD_ReqGetInterface (void)
   switch (USBD_SetupPacket.bmRequestType.Recipient)		//判断请求端口 //D[4:0]-接收端：0＝设备，1＝接口，2＝端点，3＝其他，4~31＝保留
 	{
     case REQUEST_TO_INTERFACE:
-      if ((USBD_Configuration != 0) && (USBD_SetupPacket.wIndexL < USBD_NumInterfaces)) {
+      if ((USBD_Configuration != 0) && (USBD_SetupPacket.wIndexL < USBD_NumInterfaces))
+			{
         USBD_EP0Data.pData = USBD_AltSetting + USBD_SetupPacket.wIndexL;
-      } else {
+      }
+			else
+			{
         return (__FALSE);
       }
       break;
@@ -676,18 +703,25 @@ __inline BOOL USBD_ReqSetInterface (void)
     case REQUEST_TO_INTERFACE:
       if (USBD_Configuration == 0) return (__FALSE);
       set = __FALSE;
-      if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE)) {
+      if ((!usbd_hs_enable) && (USBD_HighSpeed == __TRUE))
+			{
         return (__FALSE);  /* High speed request but high-speed not enabled */
       }
-      if (USBD_HighSpeed == __FALSE) {
+      if (USBD_HighSpeed == __FALSE)
+			{
         pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor;
-      } else {
+      }
+			else
+			{
         pD = (USB_COMMON_DESCRIPTOR *)USBD_ConfigDescriptor_HS;
       }
-      while (pD->bLength) {
-        switch (pD->bDescriptorType) {
+      while (pD->bLength)
+			{
+        switch (pD->bDescriptorType)
+				{
           case USB_CONFIGURATION_DESCRIPTOR_TYPE:
-            if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue != USBD_Configuration) {
+            if (((USB_CONFIGURATION_DESCRIPTOR *)pD)->bConfigurationValue != USBD_Configuration)
+						{
               pD = (USB_COMMON_DESCRIPTOR *)((U8 *)pD+((USB_CONFIGURATION_DESCRIPTOR *)pD)->wTotalLength);
               continue;
             }
@@ -696,17 +730,20 @@ __inline BOOL USBD_ReqSetInterface (void)
             ifn = ((USB_INTERFACE_DESCRIPTOR *)pD)->bInterfaceNumber;
             alt = ((USB_INTERFACE_DESCRIPTOR *)pD)->bAlternateSetting;
             msk = 0;
-            if ((ifn == USBD_SetupPacket.wIndexL) && (alt == USBD_SetupPacket.wValueL)) {
+            if ((ifn == USBD_SetupPacket.wIndexL) && (alt == USBD_SetupPacket.wValueL))
+						{
               set = __TRUE;
               old = USBD_AltSetting[ifn];
               USBD_AltSetting[ifn] = (U8)alt;
             }
             break;
           case USB_ENDPOINT_DESCRIPTOR_TYPE:
-            if (ifn == USBD_SetupPacket.wIndexL) {
+            if (ifn == USBD_SetupPacket.wIndexL)
+						{
               n = ((USB_ENDPOINT_DESCRIPTOR *)pD)->bEndpointAddress & 0x8F;
               m = (n & 0x80) ? ((1 << 16) << (n & 0x0F)) : (1 << n);
-              if (alt == USBD_SetupPacket.wValueL) {
+              if (alt == USBD_SetupPacket.wValueL)
+							{
                 USBD_EndPointMask |=  m;
                 USBD_EndPointHalt &= ~m;
                 USBD_ConfigEP((USB_ENDPOINT_DESCRIPTOR *)pD);
@@ -714,7 +751,8 @@ __inline BOOL USBD_ReqSetInterface (void)
                 USBD_ResetEP(n);
                 msk |= m;
               }
-              else if ((alt == old) && ((msk & m) == 0)) {
+              else if ((alt == old) && ((msk & m) == 0))
+							{
                 USBD_EndPointMask &= ~m;
                 USBD_EndPointHalt &= ~m;
                 USBD_DisableEP(n);
@@ -1043,10 +1081,13 @@ stall_i:      USBD_SetStallEP(0x80);			//清除标志
  */
 
 #ifdef __RTX
-__task void USBD_RTX_EndPoint0 (void) {
+__task void USBD_RTX_EndPoint0 (void)
+{
 
-  if (__rtx) {
-    for (;;) {
+  if (__rtx)
+	{
+    for (;;)
+		{
       usbd_os_evt_wait_or (0xFFFF, 0xFFFF);
       USBD_EndPoint0 (usbd_os_evt_get());
     }

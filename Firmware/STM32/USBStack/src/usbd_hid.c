@@ -50,13 +50,15 @@ __weak void  usbd_hid_set_protocol (U8  protocol)                               
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_HID_GetReport (void) {
+BOOL USBD_HID_GetReport (void)
+{
   U8 *ptr_buf = 0;
 
   /* Report Type   = USBD_SetupPacket.wValueH */
   /* Report ID     = USBD_SetupPacket.wValueL */
   /* Report Length = USBD_SetupPacket.wLength */
-  switch (USBD_SetupPacket.wValueH) {
+  switch (USBD_SetupPacket.wValueH)
+	{
     case HID_REPORT_INPUT:
       ptr_buf  = &USBD_HID_InReport[1];
       break;
@@ -78,13 +80,15 @@ BOOL USBD_HID_GetReport (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_HID_SetReport (void) {
+BOOL USBD_HID_SetReport (void)
+{
   U8 *ptr_buf = 0;
 
   /* Report Type   = USBD_SetupPacket.wValueH */
   /* Report ID     = USBD_SetupPacket.wValueL */
   /* Report Length = USBD_SetupPacket.wLength */
-  switch (USBD_SetupPacket.wValueH) {
+  switch (USBD_SetupPacket.wValueH)
+	{
     case HID_REPORT_INPUT:
       return (__FALSE);        /* Not Supported */
     case HID_REPORT_OUTPUT:
@@ -106,7 +110,8 @@ BOOL USBD_HID_SetReport (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_HID_GetIdle (void) {
+BOOL USBD_HID_GetIdle (void)
+{
 
   USBD_EP0Buf[0] = USBD_HID_IdleSet[USBD_SetupPacket.wValueL];
   return (__TRUE);
@@ -120,12 +125,16 @@ BOOL USBD_HID_GetIdle (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_HID_SetIdle (void) {
+BOOL USBD_HID_SetIdle (void)
+{
   U8 i;
 
-  if (USBD_SetupPacket.wValueL) {       /* If  > 0 Report ID specified        */
+  if (USBD_SetupPacket.wValueL)
+	{       /* If  > 0 Report ID specified        */
     USBD_HID_IdleSet[USBD_SetupPacket.wValueL-1] = USBD_SetupPacket.wValueH;
-  } else {                              /* If == 0 all reports                */
+  }
+	else
+	{                              /* If == 0 all reports                */
     for (i = 0; i < usbd_hid_inreport_num; i++)
       USBD_HID_IdleSet[i] = USBD_SetupPacket.wValueH;
   }
@@ -140,7 +149,8 @@ BOOL USBD_HID_SetIdle (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_HID_GetProtocol (void) {
+BOOL USBD_HID_GetProtocol (void)
+{
 
   USBD_EP0Buf[0] = usbd_hid_get_protocol ();
   return (__TRUE);
@@ -154,7 +164,8 @@ BOOL USBD_HID_GetProtocol (void) {
  *    Return Value:    TRUE - Success, FALSE - Error
  */
 
-BOOL USBD_HID_SetProtocol (void) {
+BOOL USBD_HID_SetProtocol (void)
+{
 
   usbd_hid_set_protocol (USBD_SetupPacket.wValueL);
   return (__TRUE);
@@ -172,17 +183,20 @@ BOOL USBD_HID_SetProtocol (void) {
  *    Return Value:    None
  */
 
-void USBD_HID_EP_INTIN_Event (U32 event) {
+void USBD_HID_EP_INTIN_Event (U32 event)
+{
   U8  i;
   U16 bytes_to_send;
 
   /* Check if sending is finished                                             */
   if ((DataOutSentLen >= DataOutToSendLen) &&
-      !DataOutEndWithShortPacket) {     /* If all sent and short packet also  */
+      !DataOutEndWithShortPacket)		/* If all sent and short packet also  */
+	{     
     ptrDataOut          = NULL;
     DataOutSentLen      = 0;
     DataOutToSendLen    = usbd_hid_get_report (HID_REPORT_INPUT, USBD_HID_InReport[0], &USBD_HID_InReport[1], USBD_HID_REQ_EP_INT);
-    if (DataOutToSendLen) {             /* If new send should be started      */
+    if (DataOutToSendLen)	/* If new send should be started      */
+		{             
       ptrDataOut        = USBD_HID_InReport;
       if (usbd_hid_inreport_num <= 1)   /* If only in 1 report skip ReportID  */
         ptrDataOut++;
@@ -191,29 +205,41 @@ void USBD_HID_EP_INTIN_Event (U32 event) {
     }
   }
   /* Check if new data out sending should be started                          */
-  if(!DataOutToSendLen) {               /* If send not in progress            */
-    if (DataOutAsyncReq) {              /* If asynchronous send requested     */
+  if(!DataOutToSendLen)									/* If send not in progress            */
+	{               
+    if (DataOutAsyncReq)								/* If asynchronous send requested     */
+		{              
       DataOutAsyncReq = __FALSE;
     }
-    else if (DataOutUpdateReqMask) {    /* If update requested                */
-      if (usbd_hid_inreport_num <= 1) { /* If only one in report in system    */
-        if (DataOutUpdateReqMask) {
+    else if (DataOutUpdateReqMask)			/* If update requested                */
+		{    
+      if (usbd_hid_inreport_num <= 1)		/* If only one in report in system    */
+			{ 
+        if (DataOutUpdateReqMask)
+				{
           USBD_HID_InReport[0]  = 0;    /* ReportID = 0                       */
           DataOutSentLen        = 0;
           DataOutToSendLen      = usbd_hid_get_report (HID_REPORT_INPUT, 0, &USBD_HID_InReport[1], USBD_HID_REQ_PERIOD_UPDATE);
-          if (DataOutToSendLen) {
+          if (DataOutToSendLen)
+					{
             ptrDataOut          = &USBD_HID_InReport[1];
           }
           DataOutUpdateReqMask  = 0;
         }
-      } else {                          /* If multiple reports in system      */
-        for (i = USBD_HID_InReport[0]; ; i++) {
-          if (i >= 32) i = 0;
-          if (DataOutUpdateReqMask & (1 << i)) {
+      }
+			else		/* If multiple reports in system      */
+			{                          
+        for (i = USBD_HID_InReport[0]; ; i++)
+				{
+          if (i >= 32)
+						i = 0;
+          if (DataOutUpdateReqMask & (1 << i))
+					{
             USBD_HID_InReport[0]= i+1; /* ReportID                           */
             DataOutSentLen      = 0;
             DataOutToSendLen    = usbd_hid_get_report (HID_REPORT_INPUT, i+1, &USBD_HID_InReport[1], USBD_HID_REQ_PERIOD_UPDATE);
-            if (DataOutToSendLen) {
+            if (DataOutToSendLen)
+						{
               ptrDataOut        = USBD_HID_InReport;
               DataOutToSendLen++;
             }
@@ -226,8 +252,8 @@ void USBD_HID_EP_INTIN_Event (U32 event) {
   }
   /* Check if data needs to be sent                                           */
   if (DataOutToSendLen ||
-       DataOutEndWithShortPacket)
-	{     /* If sending is in progress          */
+       DataOutEndWithShortPacket)				/* If sending is in progress          */
+	{     
     bytes_to_send = DataOutToSendLen - DataOutSentLen;
     if (bytes_to_send > usbd_hid_maxpacketsize[USBD_HighSpeed])
       bytes_to_send = usbd_hid_maxpacketsize[USBD_HighSpeed];
@@ -239,7 +265,9 @@ void USBD_HID_EP_INTIN_Event (U32 event) {
 		{
                                         /* If short packet should be sent also*/
       DataOutEndWithShortPacket = __TRUE;
-    } else {
+    }
+		else
+		{
       DataOutEndWithShortPacket = __FALSE;
     }
   }
@@ -323,11 +351,14 @@ void USBD_HID_Configure_Event (void)
  *    Return Value:    None
  */
 
-void USBD_HID_EP_INT_Event (U32 event) {
-  if (event & USBD_EVT_IN) {				//设备输出--电脑输入
+void USBD_HID_EP_INT_Event (U32 event)
+{
+  if (event & USBD_EVT_IN)		//设备输出--电脑输入
+	{				
     USBD_HID_EP_INTIN_Event  (event);
   }
-  if (event & USBD_EVT_OUT) {				//OUT Packet电脑输出包
+  if (event & USBD_EVT_OUT)		//OUT Packet电脑输出包
+	{				
     USBD_HID_EP_INTOUT_Event (event);
   }
 }
@@ -385,7 +416,7 @@ void USBD_HID_SOF_Event (void)
       do_polling = (usbd_hid_interval[USBD_HighSpeed] > ((U16)(USBD_HID_IdleReload[i]) << (2 << (3 * USBD_HighSpeed)))) && (USBD_HID_IdleReload[i] != 0);
       if (polling_reload)
 			{
-        if (do_polling)		/* If polling is longer than idle     */
+        if (do_polling)									/* If polling is longer than idle     */
 				{
           DataOutUpdateReqMask |= (1 << i);
         }
@@ -412,8 +443,8 @@ void USBD_HID_SOF_Event (void)
 		{
       USBD_HID_PollingCnt = 0;
     }
-    if (DataOutUpdateReqMask && !DataOutToSendLen)
-		{        /* If pending     */
+    if (DataOutUpdateReqMask && !DataOutToSendLen)					/* If pending     */
+		{
                                         /* refresh request and no active data */
                                         /* out then start data out            */
       USBD_HID_EP_INTIN_Event (0);
@@ -430,12 +461,16 @@ void USBD_HID_SOF_Event (void)
  *    Return Value:    None
  */
 
-__task void USBD_RTX_HID_EP_INTIN_Event (void) {
+__task void USBD_RTX_HID_EP_INTIN_Event (void)
+{
 
-  if (__rtx) {
-    for (;;) {
+  if (__rtx)
+	{
+    for (;;)
+		{
       usbd_os_evt_wait_or (0xFFFF, 0xFFFF);
-      if (usbd_os_evt_get() & USBD_EVT_IN) {
+      if (usbd_os_evt_get() & USBD_EVT_IN)
+			{
         USBD_HID_EP_INTIN_Event (0);
       }
     }
@@ -449,12 +484,16 @@ __task void USBD_RTX_HID_EP_INTIN_Event (void) {
  *    Return Value:    None
  */
 
-__task void USBD_RTX_HID_EP_INTOUT_Event (void) {
+__task void USBD_RTX_HID_EP_INTOUT_Event (void)
+{
 
-  if (__rtx) {
-    for (;;) {
+  if (__rtx)
+	{
+    for (;;)
+		{
       usbd_os_evt_wait_or (0xFFFF, 0xFFFF);
-      if (usbd_os_evt_get() & USBD_EVT_OUT) {
+      if (usbd_os_evt_get() & USBD_EVT_OUT)
+			{
         USBD_HID_EP_INTOUT_Event (0);
       }
     }

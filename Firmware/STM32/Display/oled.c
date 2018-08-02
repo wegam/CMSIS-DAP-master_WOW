@@ -32,6 +32,8 @@
 #include "stdlib.h"
 #include "oledfont.h"  	 
 #include "delay.h"
+
+
 //OLED的显存
 //存放格式如下.
 //[0]0 1 2 3 ... 127	
@@ -326,11 +328,6 @@ void OLED_PowerOn(void)
 	
 //	OLED_ShowString(0,0,"CMSIS-DAP:SWD");
 }
-
-
-
-
-
 
 
 

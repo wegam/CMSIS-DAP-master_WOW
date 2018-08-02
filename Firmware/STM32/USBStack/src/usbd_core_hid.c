@@ -78,15 +78,21 @@ __weak BOOL USBD_ReqGetDescriptor_HID (U8 **pD, U32 *len)			//HIDÃèÊö·û£¬°üÀ¨Éè±
  *    Return Value:    TRUE - Setup class request ok, FALSE - Setup class request not supported
  */
 
-__weak BOOL USBD_EndPoint0_Setup_HID_ReqToIF (void) {
-  if (USBD_SetupPacket.wIndexL == usbd_hid_if_num) {         /* IF number correct? */
-    switch (USBD_SetupPacket.bRequest) {
+__weak BOOL USBD_EndPoint0_Setup_HID_ReqToIF (void)
+{
+  if (USBD_SetupPacket.wIndexL == usbd_hid_if_num)	/* IF number correct? */
+	{         
+    switch (USBD_SetupPacket.bRequest)
+		{
       case HID_REQUEST_GET_REPORT:
-        if (USBD_HID_GetReport()) {
-          if (USBD_SetupPacket.wValueH == HID_REPORT_INPUT) {
+        if (USBD_HID_GetReport())
+				{
+          if (USBD_SetupPacket.wValueH == HID_REPORT_INPUT)
+					{
             USBD_EP0Data.pData = &USBD_HID_InReport[1];      /* point to data to be sent (skip ReportID) */
           }
-          else if (USBD_SetupPacket.wValueH == HID_REPORT_FEATURE) {
+          else if (USBD_SetupPacket.wValueH == HID_REPORT_FEATURE)
+					{
             USBD_EP0Data.pData = &USBD_HID_FeatReport[1];    /* point to data to be sent (skip ReportID) */
           }
           USBD_DataInStage();                                /* send requested data */
@@ -94,35 +100,41 @@ __weak BOOL USBD_EndPoint0_Setup_HID_ReqToIF (void) {
         }
         break;
       case HID_REQUEST_SET_REPORT:
-        if (USBD_SetupPacket.wValueH == HID_REPORT_OUTPUT) {
+        if (USBD_SetupPacket.wValueH == HID_REPORT_OUTPUT)
+				{
           USBD_EP0Data.pData = &USBD_HID_OutReport[1];       /* out data to be received (skip ReportID) */
         }
-        else if (USBD_SetupPacket.wValueH == HID_REPORT_FEATURE) {
+        else if (USBD_SetupPacket.wValueH == HID_REPORT_FEATURE)
+				{
           USBD_EP0Data.pData = &USBD_HID_FeatReport[1];      /* out data to be received (skip ReportID) */
         }
         return (__TRUE);
       case HID_REQUEST_GET_IDLE:
-        if (USBD_HID_GetIdle()) {
+        if (USBD_HID_GetIdle())
+				{
           USBD_EP0Data.pData = USBD_EP0Buf;                  /* point to data to be sent */
           USBD_DataInStage();                                /* send requested data */
           return (__TRUE);
         }
         break;
       case HID_REQUEST_SET_IDLE:
-        if (USBD_HID_SetIdle()) {
+        if (USBD_HID_SetIdle())
+				{
           USBD_StatusInStage();                              /* send Acknowledge */
           return (__TRUE);
         }
         break;
       case HID_REQUEST_GET_PROTOCOL:
-        if (USBD_HID_GetProtocol()) {
+        if (USBD_HID_GetProtocol())
+				{
           USBD_EP0Data.pData = USBD_EP0Buf;                  /* point to data to be sent */
           USBD_DataInStage();                                /* send requested data */
           return (__TRUE);
         }
         break;
       case HID_REQUEST_SET_PROTOCOL:
-        if (USBD_HID_SetProtocol()) {
+        if (USBD_HID_SetProtocol())
+				{
           USBD_StatusInStage();                              /* send Acknowledge */
           return (__TRUE);
         }
@@ -139,11 +151,15 @@ __weak BOOL USBD_EndPoint0_Setup_HID_ReqToIF (void) {
  *    Return Value:    TRUE - Out class request ok, FALSE - Out class request not supported
  */
 
-__weak BOOL USBD_EndPoint0_Out_HID_ReqToIF (void) {
-  if (USBD_SetupPacket.wIndexL == usbd_hid_if_num) {   /* IF number correct? */
-    switch (USBD_SetupPacket.bRequest) {
+__weak BOOL USBD_EndPoint0_Out_HID_ReqToIF (void)
+{
+  if (USBD_SetupPacket.wIndexL == usbd_hid_if_num)	/* IF number correct? */
+	{   
+    switch (USBD_SetupPacket.bRequest)
+		{
       case HID_REQUEST_SET_REPORT:
-        if (USBD_HID_SetReport()) {
+        if (USBD_HID_SetReport())
+				{
           USBD_StatusInStage();                        /* send Acknowledge */
           return (__TRUE);
         }

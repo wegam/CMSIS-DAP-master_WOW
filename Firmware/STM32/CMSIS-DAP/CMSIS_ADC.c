@@ -31,23 +31,23 @@ void ADC_Configuration(void)
 	RCC_ADCCLKConfig(RCC_PCLK2_Div6); //72M/6=12,ADC最大时间不能超过14M
 
 	
+	//ADC
+	GPIO_InitStructure.GPIO_Pin=GPIO_Pin_1;
+	//GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AIN ;//复用推挽输出	
+	GPIO_Init(GPIOB,&GPIO_InitStructure);
+
+	#ifdef	ADC_TEST
 		//ADC
-		GPIO_InitStructure.GPIO_Pin=GPIO_Pin_1;
-		//GPIO_InitStructure.GPIO_Speed=GPIO_Speed_50MHz;
-		GPIO_InitStructure.GPIO_Mode=GPIO_Mode_AIN ;//复用推挽输出	
-		GPIO_Init(GPIOB,&GPIO_InitStructure);
-	
-		#ifdef	ADC_TEST
-			//ADC
-			GPIO_InitStructure.GPIO_Pin=GPIO_Pin_0;
-			GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN_FLOATING ;//复用推挽输出	
-			GPIO_Init(ADC_CONNECTED_PORT,&GPIO_InitStructure);	
-			
-			//ADC
-			GPIO_InitStructure.GPIO_Pin=GPIO_Pin_2|GPIO_Pin_3;
-			GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN_FLOATING ;//复用推挽输出	
-			GPIO_Init(GPIOA,&GPIO_InitStructure);		
-		#endif
+		GPIO_InitStructure.GPIO_Pin=GPIO_Pin_0;
+		GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN_FLOATING ;//复用推挽输出	
+		GPIO_Init(ADC_CONNECTED_PORT,&GPIO_InitStructure);	
+		
+		//ADC
+		GPIO_InitStructure.GPIO_Pin=GPIO_Pin_2|GPIO_Pin_3;
+		GPIO_InitStructure.GPIO_Mode=GPIO_Mode_IN_FLOATING ;//复用推挽输出	
+		GPIO_Init(GPIOA,&GPIO_InitStructure);		
+	#endif
 	
 
 	

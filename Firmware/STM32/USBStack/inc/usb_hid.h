@@ -12,7 +12,7 @@
 #ifndef __USB_HID_H__
 #define __USB_HID_H__
 
-
+#include "stdint.h"
 /* HID Subclass Codes */
 #define HID_SUBCLASS_NONE               0x00
 #define HID_SUBCLASS_BOOT               0x01
@@ -33,15 +33,15 @@
 
 /* HID Descriptor */			//USB HID类描述符的结构
 typedef __packed struct _HID_DESCRIPTOR {
-  U8  bLength;							/* bLength */							//此描述符的长度（以字节为单位）
-  U8  bDescriptorType;			/* bDescriptorType */			//描述符种类（此处为0x21即HID类描述符）
-  U16 bcdHID;								/* bcdHID */							//HID规范版本号（BCD码），采用4个16进制的BCD格式编码，如版本1.0的BCD码为0x0100,版本为1.1的BCD码为0x0110
-  U8  bCountryCode;					/* bCountryCode */				//硬件目的国家的识别码（BCD码）
-  U8  bNumDescriptors;			/* bNumDescriptors */			//支持的附属描述符数目
+  uint8_t  bLength;							/* bLength */							//此描述符的长度（以字节为单位）
+  uint8_t  bDescriptorType;			/* bDescriptorType */			//描述符种类（此处为0x21即HID类描述符）
+  uint16_t bcdHID;								/* bcdHID */							//HID规范版本号（BCD码），采用4个16进制的BCD格式编码，如版本1.0的BCD码为0x0100,版本为1.1的BCD码为0x0110
+  uint8_t  bCountryCode;					/* bCountryCode */				//硬件目的国家的识别码（BCD码）
+  uint8_t  bNumDescriptors;			/* bNumDescriptors */			//支持的附属描述符数目
   /* Array of one or more descriptors */
   __packed struct _HID_DESCRIPTOR_LIST {
-    U8  bDescriptorType;		/* bDescriptorType */			//HID相关描述符的类型
-    U16 wDescriptorLength;	/* wDescriptorLength */		//报告描述符总长度
+    uint8_t  bDescriptorType;		/* bDescriptorType */			//HID相关描述符的类型
+    uint16_t wDescriptorLength;	/* wDescriptorLength */		//报告描述符总长度
   } DescriptorList[1];
 } HID_DESCRIPTOR;
 

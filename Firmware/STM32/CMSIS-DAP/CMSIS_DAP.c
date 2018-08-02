@@ -505,9 +505,7 @@ void BoardInit(void)
 	#endif
 	LedRunningOff();
 	UsbConnectedOff();
-	LedConnectedOff();
-	
-	
+	LedConnectedOff();	
 }
 /*******************************************************************************
 *º¯ÊýÃû			:	function
