@@ -25,6 +25,9 @@ del *.htm /s
 del *.sct /s
 del *.map /s
 
+del *._2i /s
+del *.hex /s
+
 del *.pbi /s  ::IAR±‡“Îª∑æ≥
 del *.xcl /s
 exit
